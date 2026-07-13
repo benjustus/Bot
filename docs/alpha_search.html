@@ -1,0 +1,316 @@
+<title>Pre-PDUFA Alpha Search — 12 Streams</title>
+<style>
+  :root{
+    --bg:#f6f8fb; --panel:#ffffff; --panel2:#f0f3f8; --ink:#101620;
+    --ink2:#48566b; --hair:#dbe2ec; --hair2:#eaeff6;
+    --accent:#3550c8; --accent-soft:#eaeeff;
+    --real:#0a8d78; --real-soft:#e3f4f0;
+    --bad:#c0402b; --bad-soft:#f8e7e3;
+    --warn:#a9741a; --warn-soft:#f6eede;
+    --blocked:#7a8699; --blocked-soft:#eef1f6;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --maxw:940px;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#0b0f16; --panel:#131a25; --panel2:#0f151f; --ink:#e9eef6; --ink2:#93a3ba;
+    --hair:#243044; --hair2:#1a2331; --accent:#7d97ff; --accent-soft:#1a2440;
+    --real:#3fd0b0; --real-soft:#0e2a26; --bad:#ff7a5f; --bad-soft:#331512;
+    --warn:#e0a94a; --warn-soft:#2c2210; --blocked:#8595ab; --blocked-soft:#1a212d;}}
+  :root[data-theme="dark"]{
+    --bg:#0b0f16; --panel:#131a25; --panel2:#0f151f; --ink:#e9eef6; --ink2:#93a3ba;
+    --hair:#243044; --hair2:#1a2331; --accent:#7d97ff; --accent-soft:#1a2440;
+    --real:#3fd0b0; --real-soft:#0e2a26; --bad:#ff7a5f; --bad-soft:#331512;
+    --warn:#e0a94a; --warn-soft:#2c2210; --blocked:#8595ab; --blocked-soft:#1a212d;}
+  :root[data-theme="light"]{
+    --bg:#f6f8fb; --panel:#ffffff; --panel2:#f0f3f8; --ink:#101620; --ink2:#48566b;
+    --hair:#dbe2ec; --hair2:#eaeff6; --accent:#3550c8; --accent-soft:#eaeeff;
+    --real:#0a8d78; --real-soft:#e3f4f0; --bad:#c0402b; --bad-soft:#f8e7e3;
+    --warn:#a9741a; --warn-soft:#f6eede; --blocked:#7a8699; --blocked-soft:#eef1f6;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:clamp(20px,4vw,52px) clamp(16px,4vw,32px) 80px}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  h1,h2,h3{text-wrap:balance;line-height:1.15;margin:0}
+  a{color:var(--accent)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block}
+  h1{font-size:clamp(30px,5.5vw,52px);font-weight:800;letter-spacing:-.02em;margin:16px 0 8px}
+  .lede{color:var(--ink2);font-size:clamp(16px,2.4vw,19px);max-width:66ch}
+  .rule{height:1px;background:var(--hair);border:0;margin:28px 0}
+  .verdict{background:var(--panel);border:1px solid var(--hair);border-radius:14px;padding:22px;display:grid;gap:12px;position:relative;overflow:hidden}
+  .verdict::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--bad)}
+  .verdict .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bad);font-weight:700}
+  .verdict p{margin:0;font-size:clamp(17px,2.5vw,21px);font-weight:600;letter-spacing:-.01em}
+  .verdict .sub{font-size:15px;font-weight:400;color:var(--ink2)}
+  .q{font-family:var(--mono);font-size:14px;background:var(--panel2);border:1px solid var(--hair);border-radius:8px;padding:10px 14px;color:var(--ink)}
+  section{margin-top:46px}
+  .sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+  .sec-n{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+  h2{font-size:clamp(20px,3vw,26px);font-weight:750;letter-spacing:-.015em}
+  .sec-sub{color:var(--ink2);font-size:15px;margin:-6px 0 18px}
+  p{margin:0 0 14px}
+  .card{background:var(--panel);border:1px solid var(--hair);border-radius:12px;padding:18px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  /* stream grid */
+  .streams{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+  .stream{border:1px solid var(--hair);border-radius:10px;padding:12px 13px;background:var(--panel);display:flex;flex-direction:column;gap:5px}
+  .stream .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .stream .nm{font-size:13.5px;font-weight:700}
+  .stream .vg{font-size:12px;color:var(--ink2)}
+  .pill{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:.03em;white-space:nowrap}
+  .pill.test{background:var(--real-soft);color:var(--real)}
+  .pill.block{background:var(--blocked-soft);color:var(--blocked)}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:12px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:560px}
+  th,td{text-align:right;padding:9px 12px;border-bottom:1px solid var(--hair2)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2);font-weight:700;background:var(--panel2)}
+  tbody tr:last-child td{border-bottom:0}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .chip{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px}
+  .chip.bad{background:var(--bad-soft);color:var(--bad)} .chip.warn{background:var(--warn-soft);color:var(--warn)}
+  .pos{color:var(--real)} .neg{color:var(--bad)} .amb{color:var(--warn)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin-bottom:8px}
+  .swatch{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+  .cap{font-size:12.5px;color:var(--ink2);margin-top:10px}
+  figure{margin:0}
+  .callout{border-left:3px solid var(--accent);background:var(--accent-soft);padding:13px 16px;border-radius:0 10px 10px 0;font-size:14.5px}
+  .callout.win{border-color:var(--real);background:var(--real-soft)}
+  .hm{display:grid;gap:2px;font-family:var(--mono);font-size:10px}
+  .hm .cell{aspect-ratio:1.7/1;display:flex;align-items:center;justify-content:center;border-radius:3px;color:#0a0e14}
+  .hlab{font-family:var(--mono);font-size:10px;color:var(--ink2);display:flex;align-items:center;justify-content:center}
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--hair);color:var(--ink2);font-size:13px}
+  .kbd{font-family:var(--mono);font-size:12.5px;background:var(--panel2);border:1px solid var(--hair);border-radius:6px;padding:1px 6px}
+  strong{font-weight:700}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span>Institutional Alpha Search · 12 Streams<span class="dot"></span>13 Jul 2026</div>
+    <h1>Is there <span style="color:var(--bad)">any</span> exploitable pre-PDUFA alpha vs XBI?</h1>
+    <p class="lede">Not "is there a run-up" — that's just sector beta. The real question, chased by twelve independent research streams and put on trial against overfitting: does <em>any</em> conditioning rule beat the biotech index out-of-sample, after costs?</p>
+  </header>
+  <hr class="rule">
+
+  <div class="verdict">
+    <span class="tag">Verdict</span>
+    <p>No. Across <strong>6 streams testable on real data</strong> and <strong>26 formally-tested hypotheses</strong>, <strong>zero</strong> survive multiple-testing correction + out-of-sample replication + realistic costs.</p>
+    <p class="sub">Every rule distilled from 2025 either fades or <strong>flips negative</strong> on the 2026 &amp; 2022–23 hold-outs. The one persistently-positive corner (illiquid micro-caps) is <strong>net-negative after real spreads.</strong> Five further streams (FDA designations, clinical, financials, short interest, options) are untestable on free data — open questions, not disproven.</p>
+  </div>
+
+  <!-- 12 streams -->
+  <section>
+    <div class="sec-h"><span class="sec-n">A</span><h2>The twelve streams</h2></div>
+    <p class="sec-sub">Five discovery agents ran in parallel on a shared point-in-time feature set; two meta-streams (Monte-Carlo, an independent overfitting gatekeeper) synthesized. Grey = not testable on free historical data.</p>
+    <div class="streams" id="streams"></div>
+  </section>
+
+  <!-- gatekeeper -->
+  <section>
+    <div class="sec-h"><span class="sec-n">B</span><h2>The gatekeeper: 26 hypotheses, one court</h2></div>
+    <p class="sec-sub">Treating the whole search as one multiple-testing family. Scanning ~30 noisy sub-samples <em>will</em> throw up "significant" cells by chance — the question is whether more appear than chance predicts, and whether they replicate.</p>
+    <div class="grid2">
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center;gap:14px">
+        <div style="display:flex;gap:22px;flex-wrap:wrap">
+          <div><div class="num" style="font-size:34px;font-weight:800">26</div><div class="cap" style="margin:0">hypotheses tested</div></div>
+          <div><div class="num" style="font-size:34px;font-weight:800;color:var(--warn)">5</div><div class="cap" style="margin:0">raw-significant<br>(≈1.3 expected by chance)</div></div>
+          <div><div class="num" style="font-size:34px;font-weight:800;color:var(--bad)">0</div><div class="cap" style="margin:0">pass BH-FDR<br>&amp; survive hold-out</div></div>
+        </div>
+        <div class="callout">Benjamini-Hochberg threshold works out to <span class="num">p ≤ 0.0019</span>; the smallest observed p is <span class="num">0.007</span>. Nothing clears the bar — and the cells that looked best in-sample flip negative out-of-sample.</div>
+      </div>
+      <div class="card">
+        <div class="legend"><span><span class="swatch" style="background:var(--accent)"></span>In-sample 2025</span><span><span class="swatch" style="background:var(--bad)"></span>Out-of-sample (2026 / regime)</span></div>
+        <figure><svg id="c-flip" viewBox="0 0 400 240" role="img" aria-label="In-sample versus out-of-sample excess for the top candidates"></svg></figure>
+        <p class="cap">The "edges" invert on the hold-out. This is overfitting made visible, not alpha.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- timing heatmap -->
+  <section>
+    <div class="sec-h"><span class="sec-n">C</span><h2>Timing surface: warm everywhere, hot nowhere</h2></div>
+    <p class="sec-sub">t-statistic of XBI-excess for every entry (T-x, rows) × exit (T-y, cols) combination, in-sample 2025. Significance needs t ≥ 1.96. The peak is 1.89.</p>
+    <div class="card">
+      <div id="heatmap"></div>
+      <p class="cap"><span class="chip warn">0 of 92 cells reach t = 1.96</span> &nbsp; The best 3-cell "stable region" (entry −15..−20, exit −5..−7) averages t=1.67 — and flips to <strong>−0.48%</strong> on 2026. The 2025→2026 surface correlation is <strong>r = 0.045</strong> (≈ zero): the shape does not recur.</p>
+    </div>
+  </section>
+
+  <!-- liquidity -->
+  <section>
+    <div class="sec-h"><span class="sec-n">D</span><h2>The last hope — illiquid micro-caps — dies at the spread</h2></div>
+    <p class="sec-sub">The only corner with persistently positive gross excess. Mean XBI-excess of the least-liquid quartile (ADV &lt; $3M), as friction is added.</p>
+    <div class="grid2">
+      <div class="card">
+        <figure><svg id="c-liq" viewBox="0 0 400 210" role="img" aria-label="Illiquid bucket excess: gross versus net of costs"></svg></figure>
+        <p class="cap">Gross vs. net of realistic tiered spreads (1.5–3.5%/side sub-$5M ADV).</p>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center;gap:12px">
+        <div class="callout"><strong>3 of 75 names</strong> (ADCT +154%, RNAZ +122%, PHIO +73%) supply <strong>65%</strong> of the bucket's excess — and RNAZ is a $300 stock trading ~4,000 shares/day, with reverse-split print artifacts.</div>
+        <p style="font-size:14.5px;margin:0">Clean + winsorized + cost, pooled: <strong>+0.37% mean, −2.44% median, t=0.15</strong> (CI [−4.3, +5.2]). Tradeable capacity ≈ <strong>$74K/day</strong>. A data-and-spread illusion, uncrossable at size.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- monte carlo -->
+  <section>
+    <div class="sec-h"><span class="sec-n">E</span><h2>Monte-Carlo: leverage-to-beta, or flat</h2></div>
+    <p class="sec-sub">100,000 roll-over paths from €1,500. End capital by sizing, vs. simply holding XBI over the same span.</p>
+    <div class="grid2">
+      <div class="card">
+        <figure><svg id="c-mc" viewBox="0 0 400 210" role="img" aria-label="Monte-Carlo end capital by sizing versus XBI buy and hold"></svg></figure>
+        <p class="cap">Median / expected end capital. All-in also carries a 3.4% chance of losing &gt;half (CVaR₅ ≈ €647).</p>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center;gap:12px">
+        <div class="callout win"><strong>Just holding XBI (+76.5%)</strong> beats the all-in strategy's median (+49%) with half the drawdown and no ruin tail.</div>
+        <p style="font-size:14.5px;margin:0">All-in "works" only by levering full capital into a rising sector — that's beta, priced with a −57% tail. Prudent <strong>fixed 5% sizing is flat after costs</strong>: no growth once the beta leverage is removed. There is nothing left to compound.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ranking -->
+  <section>
+    <div class="sec-h"><span class="sec-n">F</span><h2>Ranking — a list of failures, by how narrowly each fails</h2></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Candidate</th><th>In-sample</th><th>Hold-out</th><th>After costs</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Illiquid micro-caps (ADV&lt;$3M)</td><td class="num">+7.1% (t 1.95)</td><td class="num">gross +, artifacts</td><td class="num neg">median −2.4%</td><td><span class="chip bad">rejected</span></td></tr>
+          <tr><td>ML logistic selection</td><td class="num">AUC 0.61</td><td class="num amb">perm p=0.095</td><td class="num">+0.32% (n.s.)</td><td><span class="chip bad">rejected</span></td></tr>
+          <tr><td>"Weak-XBI-tape" regime</td><td class="num">+2.71% (t 2.76)</td><td class="num neg">−4.6% (flips)</td><td>—</td><td><span class="chip bad">rejected</span></td></tr>
+          <tr><td>Rising rates</td><td class="num">+3.29% (t 2.46)</td><td class="num">+1.33% (n.s.)</td><td>—</td><td><span class="chip bad">rejected</span></td></tr>
+          <tr><td>Market cap €300–500M</td><td class="num">+11.9% (t 2.0, n=13)</td><td class="num neg">−7.6% (flips)</td><td>—</td><td><span class="chip bad">rejected</span></td></tr>
+          <tr><td>Base long strategy (T-30→T-7)</td><td class="num">+1.15% (t 1.47)</td><td class="num">≈ beta</td><td class="num">≈ 0</td><td><span class="chip warn">no alpha</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- where it could hide -->
+  <section>
+    <div class="sec-h"><span class="sec-n">G</span><h2>Where alpha could still hide (honestly open)</h2></div>
+    <p>Five streams could not be tested because the data isn't free at point-in-time scale — verified directly: Yahoo returns only a <em>current</em> short-interest snapshot and <em>current</em> options chains, no history; FDA designations, clinical-trial quality and company financials have no free structured historical feed. The likeliest remaining hiding places are <strong>short-interest / squeeze dynamics</strong>, <strong>options signals</strong> (IV rank, gamma) and <strong>insider / secondary-offering timing</strong>. Testing them needs paid historical data (FINRA, ORATS/CBOE, S&amp;P Capital IQ). Until then their existence is neither confirmed nor refuted — the burden of proof stays with the strategy.</p>
+  </section>
+
+  <footer>
+    <p><strong>Method.</strong> Discovery on 2025 (in-sample, n=257 tradeable); validation on 2026 (n=122) and 2022–23 (regime hold-out) — nothing tuned on the hold-outs. Metric throughout: XBI-excess. Prices Yahoo v8 (split/div-adjusted); PDUFA dates &amp; outcomes pdufa.bio; approvals cohort drugs.com. All features strictly point-in-time (no look-ahead); label-shuffle confirms no leakage. Only real historical data — nothing estimated or invented.</p>
+    <p style="margin-top:10px;color:var(--ink2)">Full write-up <span class="kbd">REPORT_ALPHA_SEARCH.md</span> · streams <span class="kbd">output/agents/*.{json,md}</span> · reproduce <span class="kbd">python3 src/gatekeeper.py</span>. Not investment advice.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const NS="http://www.w3.org/2000/svg";
+  const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const txt=(x,y,s,a)=>{const t=el("text",{x,y,"font-family":"var(--mono)","font-size":a.size||12,fill:a.fill||css("--ink2"),"text-anchor":a.anchor||"middle","font-weight":a.w||400});t.textContent=s;return t;};
+
+  // ---- stream grid ----
+  const streams=[
+    ["1 Market Cap","test","300–500M flips −7.6% OOS"],
+    ["2 Timing","test","peak t=1.89; flips −0.48%"],
+    ["3 FDA designations","block","no free historical feed"],
+    ["4 Clinical quality","block","not structured / free"],
+    ["5 Company financials","block","current snapshots only"],
+    ["6 Short interest","block","current snapshot only"],
+    ["7 Options (IV/gamma)","block","current chains only"],
+    ["8 Liquidity","test","gross +7% → net −2.4%"],
+    ["9 Market regime","test","collinear; sign-flips"],
+    ["10 Machine learning","test","OOS AUC 0.61 (n.s.)"],
+    ["11 Monte-Carlo","test","all-in ruin tail −57%"],
+    ["12 Gatekeeper","test","0/26 survive"],
+  ];
+  const sg=document.getElementById("streams");
+  streams.forEach(([nm,kind,vg])=>{
+    const d=document.createElement("div");d.className="stream";
+    d.innerHTML=`<div class="top"><span class="nm">${nm}</span><span class="pill ${kind==='test'?'test':'block'}">${kind==='test'?'TESTED':'NO DATA'}</span></div><span class="vg">${vg}</span>`;
+    sg.appendChild(d);
+  });
+
+  // ---- flip chart ----
+  (function(){
+    const s=document.getElementById("c-flip");const W=400,H=240,pad=44,mid=120,top=16;
+    const data=[["Neg-Mom",2.24,-9.99],["Mcap 300–500M",15.51,-7.57],["Timing-opt",0.93,-0.48],["Rising rates",3.29,1.33],["Base",1.15,0.81]];
+    const max=16,scaleP=(mid-top)/max,scaleN=(H-mid-30)/max;
+    s.appendChild(el("line",{x1:pad,y1:mid,x2:W-8,y2:mid,stroke:css("--ink2"),"stroke-width":1.3}));
+    for(const v of [15,10,5]){s.appendChild(el("line",{x1:pad,y1:mid-v*scaleP,x2:W-8,y2:mid-v*scaleP,stroke:css("--hair")}));s.appendChild(txt(pad-6,mid-v*scaleP+3,"+"+v,{anchor:"end",size:9}));}
+    s.appendChild(el("line",{x1:pad,y1:mid+10*scaleN,x2:W-8,y2:mid+10*scaleN,stroke:css("--hair")}));s.appendChild(txt(pad-6,mid+10*scaleN+3,"−10",{anchor:"end",size:9}));
+    const gw=(W-pad-8)/data.length;
+    data.forEach((d,i)=>{const gx=pad+i*gw+gw/2,bw=13;
+      // IS bar (up, accent)
+      const hi=d[1]*scaleP;s.appendChild(el("rect",{x:gx-bw-1,y:mid-hi,width:bw,height:hi,rx:2,fill:css("--accent")}));
+      // OOS bar (pos up green / neg down red)
+      const pos=d[2]>=0;const ho=Math.abs(d[2])*(pos?scaleP:scaleN);
+      s.appendChild(el("rect",{x:gx+1,y:pos?mid-ho:mid,width:bw,height:ho,rx:2,fill:pos?css("--real"):css("--bad")}));
+      s.appendChild(txt(gx,H-16,d[0],{size:8.5,fill:css("--ink")}));
+      s.appendChild(txt(gx,pos?mid-ho-4:mid+ho+11,(d[2]>0?"+":"")+d[2].toFixed(1),{size:8.5,w:700,fill:pos?css("--real"):css("--bad")}));
+    });
+    s.appendChild(txt(pad,top+2,"XBI-excess %",{anchor:"start",size:9}));
+  })();
+
+  // ---- timing heatmap ----
+  (function(){
+    const TT=[[0.28,0.53,0.84,0.72,0.99,0.67,0.72,0.76,0.49],[-0.02,0.27,0.59,0.49,0.86,0.55,0.59,0.61,0.3],[-0.04,0.18,0.5,0.38,0.68,0.42,0.5,0.54,0.2],[-0.08,0.16,0.51,0.46,0.75,0.5,0.59,0.57,0.13],[-0.01,0.27,0.69,0.62,0.95,0.69,0.79,0.77,0.28],[0.21,0.52,0.99,0.83,1.17,0.96,1.08,1.04,0.58],[0.42,0.76,1.2,0.87,1.47,1.16,1.21,1.15,0.66],[-0.1,0.5,0.89,0.57,1.15,0.89,0.92,0.89,0.36],[null,1.1,1.46,1.24,1.89,1.53,1.49,1.42,0.79],[null,null,1.32,1.03,1.58,1.27,1.31,1.19,0.54],[null,null,null,null,1.18,0.69,0.7,0.58,-0.27]];
+    const entry=[60,55,50,45,40,35,30,25,20,15,10],exit=[20,15,12,10,7,5,3,2,1];
+    const wrap=document.getElementById("heatmap");
+    const grid=document.createElement("div");grid.className="hm";
+    grid.style.gridTemplateColumns=`38px repeat(${exit.length},1fr)`;
+    // header row
+    grid.appendChild(Object.assign(document.createElement("div"),{className:"hlab",textContent:""}));
+    exit.forEach(x=>grid.appendChild(Object.assign(document.createElement("div"),{className:"hlab",textContent:"−"+x})));
+    function color(t){ // 0..1.96 warm ramp; >=1.96 accent
+      if(t===null) return "transparent";
+      if(t>=1.96) return css("--accent");
+      const u=Math.max(0,Math.min(1,t/1.96));
+      // pale->amber ramp
+      const r=Math.round(245-(245-224)*u), g=Math.round(238-(238-140)*u), b=Math.round(210-(210-40)*u);
+      return `rgb(${r},${g},${b})`;
+    }
+    TT.forEach((row,ri)=>{
+      const lab=document.createElement("div");lab.className="hlab";lab.textContent="−"+entry[ri];grid.appendChild(lab);
+      row.forEach(t=>{
+        const c=document.createElement("div");c.className="cell";
+        c.style.background=color(t);c.textContent=t===null?"":t.toFixed(1);
+        if(t===null){c.style.color="transparent";c.style.background=css("--hair2");}
+        grid.appendChild(c);
+      });
+    });
+    wrap.appendChild(grid);
+    const cap=document.createElement("div");cap.className="hlab";cap.style.marginTop="6px";cap.style.justifyContent="flex-start";cap.style.color=css("--ink2");
+    cap.textContent="rows = entry day (T-x) · cols = exit day (T-y) · value = t-stat of XBI-excess";
+    wrap.appendChild(cap);
+  })();
+
+  // ---- liquidity bars ----
+  (function(){
+    const s=document.getElementById("c-liq");const W=400,H=210,base=H-38,top=16,left=30;
+    const data=[["gross",7.13,css("--warn")],["net (tiered)",1.84,css("--ink2")],["net (√-spread)",-0.40,css("--bad")],["clean+cost",0.37,css("--bad")]];
+    const maxP=8,minN=-1.5,scale=(base-top)/(maxP-minN),zero=base-(0-minN)*scale;
+    s.appendChild(el("line",{x1:left,y1:zero,x2:W-10,y2:zero,stroke:css("--ink2"),"stroke-width":1.2}));
+    for(const v of [8,4,0]){const y=base-(v-minN)*scale;s.appendChild(txt(left-4,y+3,(v>0?"+":"")+v,{anchor:"end",size:9}));}
+    const gw=(W-left-14)/data.length;
+    data.forEach((d,i)=>{const gx=left+i*gw+gw/2,bw=40,pos=d[1]>=0,h=Math.abs(d[1])*scale;
+      s.appendChild(el("rect",{x:gx-bw/2,y:pos?zero-h:zero,width:bw,height:h,rx:3,fill:d[2]}));
+      s.appendChild(txt(gx,pos?zero-h-5:zero+h+12,(d[1]>0?"+":"")+d[1].toFixed(1)+"%",{size:10,w:700,fill:d[2]}));
+      s.appendChild(txt(gx,H-16,d[0],{size:9.5,fill:css("--ink")}));});
+    s.appendChild(txt(left,top,"mean excess %",{anchor:"start",size:9}));
+  })();
+
+  // ---- monte carlo bars ----
+  (function(){
+    const s=document.getElementById("c-mc");const W=400,H=210,base=H-34,top=18,left=44;
+    const data=[["XBI hold",2648,css("--real")],["All-in EV",2475,css("--warn")],["All-in med",2238,css("--warn")],["Fixed 5%",1506,css("--ink2")],["CVaR₅",647,css("--bad")]];
+    const max=2800,scale=(W-left-58)/max,bh=24,gap=11;
+    // start line at 1500
+    const x15=left+1500*scale;
+    s.appendChild(el("line",{x1:x15,y1:top-4,x2:x15,y2:top+data.length*(bh+gap),stroke:css("--ink2"),"stroke-dasharray":"3 3","stroke-width":1}));
+    s.appendChild(txt(x15,top+data.length*(bh+gap)+11,"start €1500",{size:9}));
+    data.forEach((d,i)=>{const y=top+i*(bh+gap),w=d[1]*scale;
+      s.appendChild(el("rect",{x:left,y,width:w,height:bh,rx:3,fill:d[2]}));
+      s.appendChild(txt(left+w+5,y+bh/2+4,"€"+d[1],{anchor:"start",size:11,w:700,fill:d[2]}));
+      s.appendChild(txt(left-6,y+bh/2+4,d[0],{anchor:"end",size:10,fill:css("--ink")}));});
+  })();
+})();
+</script>
