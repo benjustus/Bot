@@ -42,8 +42,7 @@ Eine Multiple-Testing-Familie inkl. aller neuen Merkmale. Erwartete Falsch-Posit
 Silhouette nur **0,22** (k=3) → **keine sauber abgegrenzten Cluster** in den Daten. Bester IS-Cluster = „kleine, volatile, hoch-Beta"-Ecke: +3,2 % (t=1,85, Median +1,2 %, **CI enthält 0**). Über KMeans/GMM/Agglomerativ: KMeans-vs-GMM-Übereinstimmung ARI 0,27 → Cluster sind **algorithmusabhängig**, nicht robust. Von **33 Clustern (k=3..8): 0** überleben IS-signifikant + beide Hold-outs. **Kein Cluster mit dauerhaftem Alpha.**
 
 ### Stream „Combinations" (2-/3-/4-fach)
-<!-- FINALIZE: n getestet, erwartete FP, BH-Überlebende, Hold-out -->
-*(Ergebnis wird eingesetzt)*
+**10.054 Kombinationen** getestet. Erwartete Falsch-Positive @0,05: **503**; beobachtet raw-signifikant: **1.202** (über Zufall — Features sind korreliert, Excess rechtsschief). Aber: **Benjamini-Hochberg bestehen 0. Überlebende nach BH + Hold-out: 0.** Der spektakulärste In-Sample-Treffer illustriert exakt das Data-Snooping-Problem: die 4er-Kombination *{RS63 niedrig, Momentum niedrig, Beta hoch, XBI unter 200-Tage}* liefert **IS +10,3 %, t=4,87, p=0,00009, Trefferquote 95 % (n=21)** — sieht perfekt aus, ist aber im „XBI-über-200-Tage"-Tape 2026 **gar nicht testbar** und in den 2 vorhandenen 2022–23-Events **negativ**. Bei 10.000 Kombinationen findet man garantiert ein t=4,87 — es verdampft out-of-sample.
 
 ### Stream „Deep-ML" (RF/XGB/LGBM/CatBoost/LogReg, Nested CV, SHAP)
 <!-- FINALIZE: OOS-AUC je Modell, ökonomischer 2026-Test, SHAP-Top, Leakage-Check -->
