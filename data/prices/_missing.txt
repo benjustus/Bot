@@ -1,17 +1,15 @@
+ACER	Not Found
 ANTE	Not Found
 APTO	Not Found
-CASI	Not Found
-GLPG	Not Found
-SWTX	Not Found
-TURN	Not Found
-ACER	Not Found
 AVDL	Not Found
 BLUE	Not Found
+CASI	Not Found
 CDTX	Not Found
 CTIC	Not Found
 EYEN	Not Found
 FMTX	Not Found
 FOLD	Not Found
+GLPG	Not Found
 MRNS	Not Found
 MRTX	Not Found
 OCUP	Not Found
@@ -22,3 +20,5 @@ RVNC	Not Found
 SAGE	Not Found
 SCPH	Not Found
 SPPI	Not Found
+SWTX	Not Found
+TURN	Not Found

@@ -26,6 +26,8 @@ def fetch(symbols):
         for q in res:
             out[q.get('symbol')]={'marketCap':q.get('marketCap'),
                                   'shares':q.get('sharesOutstanding'),
+                                  'float':q.get('floatShares') or q.get('sharesOutstanding'),
+                                  'avgvol3m':q.get('averageDailyVolume3Month'),
                                   'name':q.get('longName') or q.get('shortName'),
                                   'price':q.get('regularMarketPrice')}
         time.sleep(0.6)
@@ -47,10 +49,11 @@ if __name__=='__main__':
     tickers=sorted(tickers)
     data=fetch(tickers)
     with open('data/marketcap.csv','w',newline='') as f:
-        w=csv.writer(f); w.writerow(['ticker','marketCap','tier','shares','name'])
+        w=csv.writer(f); w.writerow(['ticker','marketCap','tier','shares','float','avgvol3m','name'])
         for t in tickers:
             d=data.get(t,{})
-            w.writerow([t,d.get('marketCap',''),tier(d.get('marketCap')),d.get('shares',''),d.get('name','')])
+            w.writerow([t,d.get('marketCap',''),tier(d.get('marketCap')),d.get('shares',''),
+                        d.get('float',''),d.get('avgvol3m',''),d.get('name','')])
     from collections import Counter
     got=sum(1 for t in tickers if data.get(t,{}).get('marketCap'))
     print(f'market cap: {got}/{len(tickers)} tickers')

@@ -1,0 +1,13 @@
+refetching 234 tickers + 6 benchmarks WITH volume
+  40/234
+  80/234
+  120/234
+  160/234
+  200/234
+  bench XBI: 2896 bars
+  bench IBB: 2896 bars
+  bench ^GSPC: 2896 bars
+  bench ^VIX: 2897 bars
+  bench ^TNX: 2895 bars
+  bench EURUSD=X: 3000 bars
+DONE refetch

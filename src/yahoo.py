@@ -36,14 +36,16 @@ def fetch_raw(ticker, start, end, tries=4):
             ts = res.get('timestamp', [])
             q = res['indicators']['quote'][0]
             adj = res['indicators'].get('adjclose', [{}])[0].get('adjclose')
+            vol = q.get('volume')
             rows = []
             for k, t in enumerate(ts):
                 d = dt.datetime.utcfromtimestamp(t).strftime('%Y-%m-%d')
                 o, h, l, c = q['open'][k], q['high'][k], q['low'][k], q['close'][k]
                 a = adj[k] if adj else c
+                v = vol[k] if vol else None
                 if c is None:
                     continue
-                rows.append((d, o, h, l, c, a))
+                rows.append((d, o, h, l, c, a, v))
             return rows, None
         except Exception as e:
             last = str(e); time.sleep(1.5 * (i + 1))
@@ -86,15 +88,16 @@ def get(ticker, start, end, polite=0.4):
     if polite:
         time.sleep(polite)
     fp.with_suffix('.range').write_text(f'{start},{end}')
+    HDR = ['date','open','high','low','close','adjclose','volume']
     if rows is None or len(rows) == 0:
         with open(MISSING, 'a') as f:
             f.write(f'{ticker}\t{err}\n')
         # still write an empty cache marker to avoid re-fetching
         with open(fp, 'w', newline='') as f:
-            csv.writer(f).writerow(['date','open','high','low','close','adjclose'])
+            csv.writer(f).writerow(HDR)
         return []
     with open(fp, 'w', newline='') as f:
-        w = csv.writer(f); w.writerow(['date','open','high','low','close','adjclose']); w.writerows(rows)
+        w = csv.writer(f); w.writerow(HDR); w.writerows(rows)
     return rows
 
 if __name__ == '__main__':

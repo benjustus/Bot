@@ -21,7 +21,9 @@ def load_prices(ticker):
     adj = [float(x[5]) if x[5] not in ('', 'None') else None for x in r]
     hi  = [float(x[2]) if x[2] not in ('', 'None') else None for x in r]
     lo  = [float(x[3]) if x[3] not in ('', 'None') else None for x in r]
-    return {'dates': dates, 'adj': adj, 'hi': hi, 'lo': lo}
+    cl  = [float(x[4]) if x[4] not in ('', 'None') else None for x in r]
+    vol = [float(x[6]) if len(x) > 6 and x[6] not in ('', 'None') else None for x in r]
+    return {'dates': dates, 'adj': adj, 'hi': hi, 'lo': lo, 'close': cl, 'vol': vol}
 
 def _iso(d):
     return d.strftime('%Y-%m-%d') if isinstance(d, dt.date) else d
