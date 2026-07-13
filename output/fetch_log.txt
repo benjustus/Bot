@@ -1,0 +1,12 @@
+445 events, 192 unique tickers
+  25/192  priceable=23 missing=2
+  50/192  priceable=47 missing=3
+  75/192  priceable=72 missing=3
+  100/192  priceable=96 missing=4
+  125/192  priceable=121 missing=4
+  150/192  priceable=146 missing=4
+  175/192  priceable=170 missing=5
+DONE tickers: priceable=186 missing=6 (3.1% delisted/unknown)
+benchmark XBI: 508 bars
+benchmark ^GSPC: 508 bars
+benchmark IBB: 508 bars
