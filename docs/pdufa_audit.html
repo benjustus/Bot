@@ -1,0 +1,375 @@
+<title>Pre-PDUFA Run-up — Independent Audit</title>
+<style>
+  :root{
+    --bg:#f6f8fb; --panel:#ffffff; --panel2:#f0f3f8; --ink:#101620;
+    --ink2:#48566b; --hair:#dbe2ec; --hair2:#eaeff6;
+    --accent:#3550c8; --accent-soft:#eaeeff;
+    --real:#0a8d78; --real-soft:#e3f4f0;    /* confirmed / beta / fact */
+    --bad:#c0402b; --bad-soft:#f8e7e3;       /* overstated / risk */
+    --warn:#a9741a; --warn-soft:#f6eede;     /* caution */
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --maxw:920px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0b0f16; --panel:#131a25; --panel2:#0f151f; --ink:#e9eef6; --ink2:#93a3ba;
+      --hair:#243044; --hair2:#1a2331;
+      --accent:#7d97ff; --accent-soft:#1a2440;
+      --real:#3fd0b0; --real-soft:#0e2a26;
+      --bad:#ff7a5f; --bad-soft:#331512;
+      --warn:#e0a94a; --warn-soft:#2c2210;
+    }
+  }
+  :root[data-theme="dark"]{
+      --bg:#0b0f16; --panel:#131a25; --panel2:#0f151f; --ink:#e9eef6; --ink2:#93a3ba;
+      --hair:#243044; --hair2:#1a2331;
+      --accent:#7d97ff; --accent-soft:#1a2440;
+      --real:#3fd0b0; --real-soft:#0e2a26;
+      --bad:#ff7a5f; --bad-soft:#331512;
+      --warn:#e0a94a; --warn-soft:#2c2210;
+  }
+  :root[data-theme="light"]{
+      --bg:#f6f8fb; --panel:#ffffff; --panel2:#f0f3f8; --ink:#101620; --ink2:#48566b;
+      --hair:#dbe2ec; --hair2:#eaeff6;
+      --accent:#3550c8; --accent-soft:#eaeeff;
+      --real:#0a8d78; --real-soft:#e3f4f0;
+      --bad:#c0402b; --bad-soft:#f8e7e3;
+      --warn:#a9741a; --warn-soft:#f6eede;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;
+       -webkit-font-smoothing:antialiased;font-size:16px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:clamp(20px,4vw,52px) clamp(16px,4vw,32px) 80px}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+  h1,h2,h3{text-wrap:balance;line-height:1.15;margin:0}
+  a{color:var(--accent)}
+
+  /* masthead */
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+           color:var(--ink2);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block}
+  h1{font-size:clamp(30px,5.5vw,50px);font-weight:800;letter-spacing:-.02em;margin:16px 0 8px}
+  .lede{color:var(--ink2);font-size:clamp(16px,2.4vw,19px);max-width:64ch}
+  .rule{height:1px;background:var(--hair);border:0;margin:28px 0}
+
+  /* verdict band */
+  .verdict{background:var(--panel);border:1px solid var(--hair);border-radius:14px;
+           padding:22px 22px;display:grid;gap:14px;position:relative;overflow:hidden}
+  .verdict::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--bad)}
+  .verdict .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+                color:var(--bad);font-weight:700}
+  .verdict p{margin:0;font-size:clamp(17px,2.5vw,21px);font-weight:600;letter-spacing:-.01em}
+  .verdict .sub{font-size:15px;font-weight:400;color:var(--ink2)}
+
+  /* tiles */
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:14px}
+  .tile{background:var(--panel);border:1px solid var(--hair);border-radius:12px;padding:16px 16px 15px;display:flex;flex-direction:column;gap:7px}
+  .tile .k{font-size:12.5px;color:var(--ink2);font-weight:600;letter-spacing:.01em}
+  .tile .claim{font-family:var(--mono);font-size:14px;color:var(--ink2);text-decoration:line-through;text-decoration-color:var(--bad);text-decoration-thickness:1.5px}
+  .tile .real{font-family:var(--mono);font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1.05}
+  .tile .note{font-size:12px;color:var(--ink2)}
+  .pos{color:var(--real)} .neg{color:var(--bad)} .amb{color:var(--warn)}
+
+  /* sections */
+  section{margin-top:44px}
+  .sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+  .sec-n{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700;letter-spacing:.05em}
+  h2{font-size:clamp(20px,3vw,26px);font-weight:750;letter-spacing:-.015em}
+  .sec-sub{color:var(--ink2);font-size:15px;margin:-6px 0 18px}
+  p{margin:0 0 14px}
+
+  /* cards / panels */
+  .card{background:var(--panel);border:1px solid var(--hair);border-radius:12px;padding:18px 18px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}}
+
+  /* table */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:12px}
+  table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+  th,td{text-align:right;padding:9px 13px;border-bottom:1px solid var(--hair2)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);font-weight:700;
+           background:var(--panel2);position:sticky;top:0}
+  tbody tr:last-child td{border-bottom:0}
+  td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  tr.hi td{background:var(--accent-soft)}
+  .chip{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;letter-spacing:.02em}
+  .chip.real{background:var(--real-soft);color:var(--real)}
+  .chip.bad{background:var(--bad-soft);color:var(--bad)}
+  .chip.warn{background:var(--warn-soft);color:var(--warn)}
+
+  /* chart */
+  .chart{width:100%}
+  .cap{font-size:12.5px;color:var(--ink2);margin-top:10px}
+  figure{margin:0}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin-bottom:6px}
+  .swatch{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+
+  .callout{border-left:3px solid var(--accent);background:var(--accent-soft);padding:13px 16px;border-radius:0 10px 10px 0;font-size:15px}
+  .callout.win{border-color:var(--real);background:var(--real-soft)}
+  ul{margin:0 0 14px;padding-left:20px} li{margin:5px 0}
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--hair);color:var(--ink2);font-size:13px}
+  .kbd{font-family:var(--mono);font-size:12.5px;background:var(--panel2);border:1px solid var(--hair);border-radius:6px;padding:1px 6px}
+  strong{font-weight:700}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow"><span class="dot"></span>Independent Quant Audit · Biotech Catalyst<span class="dot"></span>13 Jul 2026</div>
+    <h1>Pre-PDUFA Run-up: real pattern, <span style="color:var(--bad)">no real edge</span></h1>
+    <p class="lede">A red-team replication and 27&times;-larger extension of the original 16-event backtest. The strategy: buy 30 days before a drug's FDA decision date, sell 7 days before. Does it actually beat the biotech index? Short answer below.</p>
+  </header>
+
+  <hr class="rule">
+
+  <div class="verdict">
+    <span class="tag">Verdict</span>
+    <p>The raw run-up is genuine but small (<span class="num">+3.4%</span>/trade) — and it is <strong>almost entirely biotech-sector beta</strong>. Adjusted for XBI, the PDUFA-specific excess is <span class="num">+1.0%</span> and <strong>statistically indistinguishable from zero.</strong></p>
+    <p class="sub">On 431 verified events, the excess hit-rate is a coin flip (49.7%), the median excess is ~0%, and eventual rejections (CRLs) ran up <em>as much</em> as approvals. In the same window, simply holding XBI returned <span class="num">+76.5%</span> — beating the strategy at half the risk.</p>
+  </div>
+
+  <div class="tiles">
+    <div class="tile">
+      <div class="k">Return per trade (−30→−7d)</div>
+      <div class="claim">claim +7.31% · n=16</div>
+      <div class="real"><span class="amb">+1.0%</span></div>
+      <div class="note">beta-adjusted excess · n=431 · not significant (t=1.1)</div>
+    </div>
+    <div class="tile">
+      <div class="k">Hit rate (beats the index)</div>
+      <div class="claim">claim 68.8%</div>
+      <div class="real"><span class="neg">49.7%</span></div>
+      <div class="note">excess-over-XBI hit rate — a coin flip</div>
+    </div>
+    <div class="tile">
+      <div class="k">Does run-up predict the outcome?</div>
+      <div class="claim">implied: winners run up</div>
+      <div class="real"><span class="neg">No</span></div>
+      <div class="note">CRLs ran up +4.9% vs approvals +2.8%</div>
+    </div>
+    <div class="tile">
+      <div class="k">€1,500 all-in, rolled over</div>
+      <div class="claim">claim → €2,082</div>
+      <div class="real"><span class="amb">€1,377</span></div>
+      <div class="note">honest sample, one path · −55% drawdown · 18% chance of loss</div>
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <section>
+    <div class="sec-h"><span class="sec-n">01</span><h2>The original's math is correct — its data is not</h2></div>
+    <p class="sec-sub">I re-fetched every price independently and rebuilt the engine from scratch. All 16 trades reproduce to &lt;0.01 percentage points.</p>
+    <div class="grid2">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Metric</th><th class="num">Original</th><th class="num">Replicated</th></tr></thead>
+          <tbody>
+            <tr><td>Mean return / trade</td><td class="num">+7.31%</td><td class="num">+7.31%</td></tr>
+            <tr><td>Median</td><td class="num">+8.64%</td><td class="num">+8.64%</td></tr>
+            <tr><td>Hit rate</td><td class="num">68.75%</td><td class="num">68.8%</td></tr>
+            <tr><td>Profit factor</td><td class="num">4.10</td><td class="num">4.10</td></tr>
+            <tr><td>End capital (no allow.)</td><td class="num">€2,082</td><td class="num">€2,082</td></tr>
+            <tr><td>Capital drawdown</td><td class="num">−24.8%</td><td class="num">−24.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:8px">So where's the problem?</h3>
+        <ul style="font-size:14.5px">
+          <li><strong>n = 16.</strong> The sign-test on the original returns gives p = 0.21 — not significant even before adjustment.</li>
+          <li><strong>Winner selection.</strong> Only known, mostly-approved drugs; 7 acquired winners dropped; zero CRLs.</li>
+          <li><strong>No beta control.</strong> 2023–25 was a strong biotech tape — any name held 23 days made money.</li>
+          <li><strong>One regime.</strong> The sample sits inside a bull market (see §5).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <div class="sec-h"><span class="sec-n">02</span><h2>Subtract sector beta and the edge collapses</h2></div>
+    <p class="sec-sub">431 events (2025–26, incl. 119 CRLs). For every trade: raw return vs. return minus XBI over the identical window. Raw is significant in all four timings; the excess is not significant in any.</p>
+    <div class="card">
+      <div class="legend"><span><span class="swatch" style="background:var(--ink2)"></span>Raw return</span><span><span class="swatch" style="background:var(--accent)"></span>Excess over XBI (the real test)</span></div>
+      <figure><svg id="c-collapse" class="chart" viewBox="0 0 720 240" role="img" aria-label="Raw vs excess return across four timing variants"></svg></figure>
+      <p class="cap">Every raw bar (grey) clears +2%. Every excess bar (blue) sits at ~0–1% with a 95% CI straddling zero. The signal is beta, not alpha.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <div class="sec-h"><span class="sec-n">03</span><h2>Run-up carries no information about the outcome</h2></div>
+    <p class="sec-sub">The user's key question: was anything visible in the price <em>before</em> the decision? Split the pre-event run-up by what the FDA eventually did.</p>
+    <div class="grid2">
+      <div class="card">
+        <div class="legend"><span><span class="swatch" style="background:var(--real)"></span>Eventually Approved (n=317)</span><span><span class="swatch" style="background:var(--bad)"></span>Eventually CRL (n=114)</span></div>
+        <figure><svg id="c-outcome" class="chart" viewBox="0 0 340 200" role="img" aria-label="Pre-event run-up: approvals versus CRLs"></svg></figure>
+        <p class="cap">Eventual rejections ran up <em>more</em> than approvals. The market does not front-run the verdict.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:10px">The tail you're exposed to</h3>
+        <p style="font-size:14.5px">Holding <em>through</em> the decision (−7d → +3d) instead of exiting:</p>
+        <div class="tbl-wrap" style="border:0">
+        <table style="min-width:0">
+          <tbody>
+            <tr><td>Approved</td><td class="num pos">+0.7%</td><td class="num">worst −54%</td></tr>
+            <tr><td>CRL</td><td class="num neg">−6.9%</td><td class="num neg">worst −80%</td></tr>
+            <tr><td>All events</td><td class="num neg">−1.3%</td><td class="num">mean</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="cap" style="margin-top:12px">The −7d exit avoids a negative-expectancy, −80%-tail event. But once you exit, all that's left is the ~zero-excess beta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <div class="sec-h"><span class="sec-n">04</span><h2>The only "edge" hides in illiquid micro-caps — and it's an illusion</h2></div>
+    <p class="sec-sub">By market-cap tier (Variant A). Watch the gap between mean and median.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Market cap</th><th class="num">n</th><th class="num">Mean raw</th><th class="num">Median raw</th><th class="num">Excess (t)</th><th>Read</th></tr></thead>
+        <tbody>
+          <tr><td>&lt; €500M</td><td class="num">65</td><td class="num">+7.58%</td><td class="num">+1.51%</td><td class="num">+5.74% (1.5)</td><td><span class="chip warn">outlier-driven</span></td></tr>
+          <tr><td>€500M–2B</td><td class="num">41</td><td class="num">+1.43%</td><td class="num">+0.40%</td><td class="num">+0.23% (0.1)</td><td><span class="chip bad">nothing</span></td></tr>
+          <tr><td>€2–10B</td><td class="num">71</td><td class="num">+4.90%</td><td class="num">+4.27%</td><td class="num">+1.59% (1.2)</td><td><span class="chip warn">weak</span></td></tr>
+          <tr><td>&gt; €10B</td><td class="num">147</td><td class="num">+2.29%</td><td class="num">+1.81%</td><td class="num">−0.14% (−0.2)</td><td><span class="chip bad">zero</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px">In the &lt;€500M tier the <strong>mean is +7.6% but the median is +1.5%</strong> — a handful of extreme, often data-suspect names (e.g. RNAZ, a preclinical company with no real PDUFA and ±100% reverse-split prints) do all the work. In big caps the excess is exactly zero, as expected: one drug doesn't move a mega-cap. This is lottery-ticket variance, not a durable edge — and §7 shows real trading costs erase it precisely here.</p>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <div class="sec-h"><span class="sec-n">05</span><h2>It's a regime, not a strategy</h2></div>
+    <p class="sec-sub">pdufa.bio's own 1,754-event study (T-120→T-1) and my 2022–23 approvals cohort agree: the run-up flips negative in bear years.</p>
+    <div class="card">
+      <figure><svg id="c-regime" class="chart" viewBox="0 0 720 220" role="img" aria-label="Biotech run-up by year, 2020 to 2026"></svg></figure>
+      <p class="cap">Pre-decision run-up by year (external reference, T-120→T-1). Strongly positive in 2020/2024/2025 bull tapes; <span class="neg">negative in the 2022–23 bear</span>. My own approvals-only 2022–23 cohort (winner-biased, the optimistic case) came out flat: raw +2.4%, median +0.07%, hit 51.5%, not significant.</p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <div class="sec-h"><span class="sec-n">06</span><h2>The decisive comparison: just buy the index</h2></div>
+    <p class="sec-sub">Over the exact span of the capital simulation (Dec 2024 → Jun 2026), what did passive beats active?</p>
+    <div class="grid2">
+      <div class="card">
+        <figure><svg id="c-bench" class="chart" viewBox="0 0 384 210" role="img" aria-label="Passive index returns versus the all-in strategy"></svg></figure>
+        <p class="cap">Buy-and-hold return over the same window.</p>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center;gap:14px">
+        <div class="callout win"><strong>XBI +76.5%</strong> (−26% drawdown) beat the all-in strategy's Monte-Carlo median of <strong>+49%</strong> — with half the drawdown and no single-name gap risk.</div>
+        <p style="font-size:14.5px;margin:0">The strategy's positive median is <strong>sector beta you could own directly.</strong> Across 3,000 random roll-over chains: median €2,242, but the 5th percentile is €1,143 (−24%), the worst path €598 (−60%), and <strong>18% of paths lose money</strong>. You'd take concentrated single-stock risk to underperform the index.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section>
+    <div class="sec-h"><span class="sec-n">07</span><h2>Robustness: costs finish off what beta didn't</h2></div>
+    <div class="grid2">
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:10px">Frictions on the raw +3.38%</h3>
+        <div class="tbl-wrap" style="border:0"><table style="min-width:0"><tbody>
+          <tr><td>Base (adj. close)</td><td class="num">+3.38%</td></tr>
+          <tr><td>+ slippage 0.5%/side</td><td class="num amb">+2.35%</td></tr>
+          <tr><td>+ slippage 1.5%/side</td><td class="num neg">+0.33%</td></tr>
+          <tr><td>+ USD/EUR FX</td><td class="num">+2.89%</td></tr>
+        </tbody></table></div>
+        <p class="cap" style="margin-top:10px">The only nominal edge sits in illiquid names where 1.5%/side slippage is realistic — and there it erases the raw signal entirely.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:10px">Timing ±5 days (excess %)</h3>
+        <p style="font-size:14.5px;margin-bottom:8px">Across all 12 entry/exit combinations the excess ranges only <strong>−0.1% to +1.1%</strong>. The near-zero result is not a timing fluke — it is robustly small.</p>
+        <div class="callout" style="font-size:14px">Also missing by honest necessity: <strong>review type</strong> (Priority/Standard) and <strong>short interest</strong> — not available at scale from free sources, so left as explicit gaps rather than estimated.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section>
+    <div class="sec-h"><span class="sec-n">08</span><h2>If you insisted on trading it</h2></div>
+    <p>There is no scientifically defensible long-only run-up strategy in this evidence. The raw signal is biotech beta — cheaper and safer via <strong>XBI</strong>. The only rigorous framing left would be: test for <em>residual</em> alpha beta-neutral (long name / short XBI — my numbers say ≈none); use <strong>fixed small size</strong> (≤1–2%), never all-in (the −60% ruin tail); hard exit before the event; exclude nano-caps and reverse-split names; and validate across a <strong>full bull-and-bear cycle</strong>, not one regime. Prediction: net of costs, still no durable edge.</p>
+  </section>
+
+  <footer>
+    <p><strong>Data.</strong> Prices: Yahoo Finance v8, split/dividend-adjusted (original replicated exactly, so the feed is trustworthy). PDUFA dates &amp; outcomes: pdufa.bio <span class="kbd">/decisions</span> (445 events, deterministically parsed) + drugs.com approval archive (2022–23 cohort) + pdufa.bio <span class="kbd">/runup-by-year</span> (1,754-event external reference). All real; nothing estimated or invented.</p>
+    <p><strong>Honest limits.</strong> The clean dual-outcome sample is concentrated in 2025–26 (a bull regime); a fully unbiased 2010–24 set was not reconstructable from free sources (ex-ante PDUFA calendars are paywalled; the Web Archive was blocked here). Market-cap tier is a current-value proxy. "Unavailable in feed" ≠ proven delisting. <strong>Not investment advice — past patterns do not predict the future.</strong></p>
+    <p style="margin-top:12px;color:var(--ink2)">Full methodology, code and reproduction: <span class="kbd">REPORT.md</span> · <span class="kbd">python3 src/run_all.py</span></p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const SVGNS="http://www.w3.org/2000/svg";
+  function el(n,a){const e=document.createElementNS(SVGNS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(x,y,s,a){const t=el("text",{x,y,"font-family":"var(--mono)","font-size":a.size||12,fill:a.fill||css("--ink2"),"text-anchor":a.anchor||"middle","font-weight":a.w||400});t.textContent=s;if(a.ls)t.setAttribute("letter-spacing",a.ls);return t;}
+
+  // ---- 2. collapse: grouped bars raw vs excess ----
+  (function(){
+    const s=document.getElementById("c-collapse");const W=720,H=240,pad=40,base=H-42,top=24;
+    const data=[["A −30→−7",3.38,0.96],["B −45→−7",4.10,0.81],["C −30→−3",3.56,0.68],["D −21→−7",2.09,0.44]];
+    const max=5, scale=(base-top)/max;
+    // zero + gridlines
+    for(let v=0;v<=5;v++){const y=base-v*scale;s.appendChild(el("line",{x1:pad,y1:y,x2:W-14,y2:y,stroke:css("--hair"),"stroke-width":v===0?1.4:1}));s.appendChild(txt(pad-8,y+4,v+"%",{anchor:"end",size:11}));}
+    const groupW=(W-pad-24)/data.length;
+    data.forEach((d,i)=>{
+      const gx=pad+i*groupW+groupW/2, bw=30;
+      [[d[1],css("--ink2"),-bw-3],[d[2],css("--accent"),3]].forEach(([val,col,off])=>{
+        const h=val*scale;s.appendChild(el("rect",{x:gx+off,y:base-h,width:bw,height:h,rx:3,fill:col}));
+        s.appendChild(txt(gx+off+bw/2,base-h-6,(val>0?"+":"")+val.toFixed(1),{size:11,w:700,fill:col}));
+      });
+      s.appendChild(txt(gx,base+18,d[0],{size:11}));
+    });
+  })();
+
+  // ---- 3. outcome bars ----
+  (function(){
+    const s=document.getElementById("c-outcome");const W=340,H=200,base=H-34,top=20,left=20;
+    const data=[["Approved",2.84,css("--real")],["CRL",4.87,css("--bad")]];
+    const max=6,scale=(base-top)/max;
+    for(let v=0;v<=6;v+=2){const y=base-v*scale;s.appendChild(el("line",{x1:left+24,y1:y,x2:W-14,y2:y,stroke:css("--hair"),"stroke-width":v===0?1.4:1}));s.appendChild(txt(left+18,y+4,v+"%",{anchor:"end",size:11}));}
+    const gw=(W-left-24-30)/data.length;
+    data.forEach((d,i)=>{const gx=left+30+i*gw+gw/2,bw=54,h=d[1]*scale;
+      s.appendChild(el("rect",{x:gx-bw/2,y:base-h,width:bw,height:h,rx:4,fill:d[2]}));
+      s.appendChild(txt(gx,base-h-7,"+"+d[1].toFixed(2)+"%",{size:12,w:700,fill:d[2]}));
+      s.appendChild(txt(gx,base+18,d[0],{size:12,fill:css("--ink")}));});
+  })();
+
+  // ---- 5. regime by year ----
+  (function(){
+    const s=document.getElementById("c-regime");const W=720,H=220,mid=112,pad=40;
+    const data=[["2020",12.9],["2021",7.3],["2022",-5.1],["2023",-3.8],["2024",12.6],["2025",13.0],["2026",11.5]];
+    const max=15,scaleP=(mid-18)/max,scaleN=(H-mid-34)/max;
+    s.appendChild(el("line",{x1:pad,y1:mid,x2:W-14,y2:mid,stroke:css("--ink2"),"stroke-width":1.4}));
+    for(const v of [15,10,5]){s.appendChild(el("line",{x1:pad,y1:mid-v*scaleP,x2:W-14,y2:mid-v*scaleP,stroke:css("--hair")}));s.appendChild(txt(pad-8,mid-v*scaleP+4,"+"+v,{anchor:"end",size:10}));}
+    s.appendChild(el("line",{x1:pad,y1:mid+5*scaleN,x2:W-14,y2:mid+5*scaleN,stroke:css("--hair")}));
+    s.appendChild(txt(pad-8,mid+5*scaleN+4,"−5",{anchor:"end",size:10}));
+    const gw=(W-pad-24)/data.length;
+    data.forEach((d,i)=>{const gx=pad+i*gw+gw/2,bw=40,pos=d[1]>=0;
+      const h=Math.abs(d[1])*(pos?scaleP:scaleN);
+      s.appendChild(el("rect",{x:gx-bw/2,y:pos?mid-h:mid,width:bw,height:h,rx:3,fill:pos?css("--real"):css("--bad")}));
+      s.appendChild(txt(gx,pos?mid-h-6:mid+h+15,(d[1]>0?"+":"")+d[1].toFixed(1),{size:11,w:700,fill:pos?css("--real"):css("--bad")}));
+      s.appendChild(txt(gx,H-8,d[0],{size:11}));});
+  })();
+
+  // ---- 6. benchmark vs strategy ----
+  (function(){
+    const s=document.getElementById("c-bench");const W=384,H=210,top=18,left=70;
+    const data=[["XBI",76.5,css("--real")],["Strategy*",49,css("--warn")],["IBB",44.3,css("--ink2")],["S&P 500",27.5,css("--ink2")]];
+    const max=80,scale=(W-left-52)/max;
+    const bh=30,gap=14;
+    data.forEach((d,i)=>{const y=top+i*(bh+gap);const w=d[1]*scale;
+      s.appendChild(el("rect",{x:left,y,width:w,height:bh,rx:4,fill:d[2]}));
+      s.appendChild(txt(left+w+6,y+bh/2+4,"+"+d[1].toFixed(1)+"%",{anchor:"start",size:12,w:700,fill:d[2]}));
+      s.appendChild(txt(left-8,y+bh/2+4,d[0],{anchor:"end",size:12,fill:css("--ink")}));});
+    s.appendChild(txt(left,H-6,"* all-in Monte-Carlo median",{anchor:"start",size:10.5}));
+  })();
+})();
+</script>
