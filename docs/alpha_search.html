@@ -96,7 +96,7 @@
 
   <div class="verdict">
     <span class="tag">Verdict</span>
-    <p>No. Across <strong>6 streams testable on real data</strong> and <strong>26 formally-tested hypotheses</strong>, <strong>zero</strong> survive multiple-testing correction + out-of-sample replication + realistic costs.</p>
+    <p>No. Across <strong>10,000+ tested subsets, combinations, clusters and hypotheses</strong> on real data, <strong>zero</strong> survive multiple-testing correction + out-of-sample replication + realistic costs.</p>
     <p class="sub">Every rule distilled from 2025 either fades or <strong>flips negative</strong> on the 2026 &amp; 2022–23 hold-outs. The one persistently-positive corner (illiquid micro-caps) is <strong>net-negative after real spreads.</strong> Five further streams (FDA designations, clinical, financials, short interest, options) are untestable on free data — open questions, not disproven.</p>
   </div>
 
@@ -188,10 +188,31 @@
     </div>
   </section>
 
+  <!-- deeper subset search -->
+  <section>
+    <div class="sec-h"><span class="sec-n">G</span><h2>Going deeper: every subset, combination and cluster</h2></div>
+    <p class="sec-sub">Then we searched harder — 10,054 feature combinations, 33 clusters, an expanded ML with new features (relative strength vs XBI, beta, ATR), and — newly unlocked via free openFDA data — Priority-vs-Standard review. The multiple-testing pile is exactly what the theory predicts.</p>
+    <div class="grid2">
+      <div class="card">
+        <figure><svg id="c-funnel" viewBox="0 0 400 200" role="img" aria-label="Combination search funnel: 10,054 tested to 0 survivors"></svg></figure>
+        <p class="cap">2/3/4-way combinations. 1,202 look significant (≈503 expected by chance) — <strong>0 pass BH-FDR, 0 survive the hold-out.</strong></p>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center;gap:11px">
+        <div class="callout">The single best combination — {low RS, low momentum, high beta, XBI&lt;200d} — scores <strong>+10.3%, t=4.87, 95% hit</strong> in-sample. But it needs "XBI below its 200-day MA", so it selects <strong>zero</strong> events in the 2026 tape and is <strong>negative</strong> on the 2 regime-holdout events it has. With 10,000 tries you are guaranteed such a mirage.</div>
+        <ul style="font-size:14px;margin:0">
+          <li><strong>Clusters:</strong> silhouette 0.22 (no clean groups); 0 of 33 survive both hold-outs.</li>
+          <li><strong>Relative strength vs XBI:</strong> no alpha (flips −1.8% OOS).</li>
+          <li><strong>Priority Review</strong> (now testable): Priority −1.3% ≤ Standard +2.3% — the opposite of the naive bet, and Standard flips −11.6% in the bear regime.</li>
+          <li><strong>ML v2:</strong> OOS-AUC 0.57, selected net excess +0.14% (≈0); trees below chance.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- where it could hide -->
   <section>
-    <div class="sec-h"><span class="sec-n">G</span><h2>Where alpha could still hide (honestly open)</h2></div>
-    <p>Five streams could not be tested because the data isn't free at point-in-time scale — verified directly: Yahoo returns only a <em>current</em> short-interest snapshot and <em>current</em> options chains, no history; FDA designations, clinical-trial quality and company financials have no free structured historical feed. The likeliest remaining hiding places are <strong>short-interest / squeeze dynamics</strong>, <strong>options signals</strong> (IV rank, gamma) and <strong>insider / secondary-offering timing</strong>. Testing them needs paid historical data (FINRA, ORATS/CBOE, S&amp;P Capital IQ). Until then their existence is neither confirmed nor refuted — the burden of proof stays with the strategy.</p>
+    <div class="sec-h"><span class="sec-n">H</span><h2>Where alpha could still hide (honestly open)</h2></div>
+    <p>The remaining untestable streams need paid point-in-time data — verified directly: Yahoo returns only a <em>current</em> short-interest snapshot and <em>current</em> options chains, no history; clinical-trial quality and company financials have no free structured historical feed. (FDA <em>review priority</em> was newly unlocked via openFDA and tested above — no alpha.) The likeliest remaining hiding places are <strong>short-interest / squeeze dynamics</strong>, <strong>options signals</strong> (IV rank, gamma) and <strong>insider / secondary-offering timing</strong> — needing FINRA, ORATS/CBOE, S&amp;P Capital IQ. Until then their existence is neither confirmed nor refuted; the burden of proof stays with the strategy.</p>
   </section>
 
   <footer>
@@ -311,6 +332,19 @@
       s.appendChild(el("rect",{x:left,y,width:w,height:bh,rx:3,fill:d[2]}));
       s.appendChild(txt(left+w+5,y+bh/2+4,"€"+d[1],{anchor:"start",size:11,w:700,fill:d[2]}));
       s.appendChild(txt(left-6,y+bh/2+4,d[0],{anchor:"end",size:10,fill:css("--ink")}));});
+  })();
+
+  // ---- combination funnel (log-ish horizontal bars) ----
+  (function(){
+    const s=document.getElementById("c-funnel");if(!s)return;const W=400,H=200,top=18,left=118;
+    const data=[["tested",10054,css("--ink2")],["raw p<0.05",1202,css("--warn")],["expected by chance",503,css("--blocked")],["pass BH-FDR",0,css("--bad")],["survive hold-out",0,css("--bad")]];
+    const maxL=Math.log10(10054),scale=(W-left-46)/maxL,bh=24,gap=10;
+    data.forEach((d,i)=>{const y=top+i*(bh+gap);
+      const w=d[1]>0?Math.max(2,Math.log10(d[1])*scale):2;
+      s.appendChild(el("rect",{x:left,y,width:w,height:bh,rx:3,fill:d[2]}));
+      s.appendChild(txt(left+w+5,y+bh/2+4,d[1].toLocaleString(),{anchor:"start",size:11,w:700,fill:d[1]>0?d[2]:css("--bad")}));
+      s.appendChild(txt(left-6,y+bh/2+4,d[0],{anchor:"end",size:10.5,fill:css("--ink")}));});
+    s.appendChild(txt(left,H-6,"bar length = log scale",{anchor:"start",size:9}));
   })();
 })();
 </script>
