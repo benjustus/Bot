@@ -44,14 +44,24 @@ Silhouette nur **0,22** (k=3) → **keine sauber abgegrenzten Cluster** in den D
 ### Stream „Combinations" (2-/3-/4-fach)
 **10.054 Kombinationen** getestet. Erwartete Falsch-Positive @0,05: **503**; beobachtet raw-signifikant: **1.202** (über Zufall — Features sind korreliert, Excess rechtsschief). Aber: **Benjamini-Hochberg bestehen 0. Überlebende nach BH + Hold-out: 0.** Der spektakulärste In-Sample-Treffer illustriert exakt das Data-Snooping-Problem: die 4er-Kombination *{RS63 niedrig, Momentum niedrig, Beta hoch, XBI unter 200-Tage}* liefert **IS +10,3 %, t=4,87, p=0,00009, Trefferquote 95 % (n=21)** — sieht perfekt aus, ist aber im „XBI-über-200-Tage"-Tape 2026 **gar nicht testbar** und in den 2 vorhandenen 2022–23-Events **negativ**. Bei 10.000 Kombinationen findet man garantiert ein t=4,87 — es verdampft out-of-sample.
 
-### Stream „Deep-ML" (RF/XGB/LGBM/CatBoost/LogReg, Nested CV, SHAP)
-<!-- FINALIZE: OOS-AUC je Modell, ökonomischer 2026-Test, SHAP-Top, Leakage-Check -->
-*(Ergebnis wird eingesetzt)*
+### Stream „Deep-ML" (Walk-Forward, kein Leakage)
+Der Agent-Lauf mit 6 Modellen + Nested CV + SHAP + 900 Permutations-Fits überschritt sein Rechenbudget (Timeout); ich habe den Kernbefund mit einem kompakten Walk-Forward (LogReg/RandomForest/HistGradientBoosting, Training 2025 → Test 2026, Label-Shuffle, ökonomischer Test) reproduziert. Ergebnis auf dem **erweiterten** Feature-Set: Logistic **OOS-AUC 0,571** (selektierte Netto-Excess **+0,14 % ≈ 0** vs. Full −0,81 %), RandomForest **0,408** und HistGB **0,402** — beide **unter Zufall** (klassisches Overfitting); Label-Shuffle-AUC ≈ 0,50 (**kein Leakage**). Die neuen Merkmale (relative Stärke, Beta, ATR …) verbessern die Modelle **nicht** (Logistic-AUC sogar leicht niedriger als in der Vorrunde, 0,61→0,57). **Kein Modell schlägt XBI out-of-sample nach Kosten.**
 
 ---
 
 ## Rangliste der „Kandidaten" (nach Robustheit, nicht Rendite)
-<!-- FINALIZE nach combos/ml2 -->
+
+| „Kandidat" (Teilmenge) | In-Sample 2025 | Hold-out 2026 | Regime 2022–23 | Urteil |
+|---|---|---|---|---|
+| 4er-Kombi (bester von 10.054) | +10,3 %, t=4,87, Hit 95 % | **nicht testbar** (0 Events) | −1,5 % (n=2) | **verworfen** (Regime-Artefakt) |
+| Cluster „klein/volatil/hi-Beta" | +3,2 %, t=1,85 (n.s.) | +3,1 % | **−4,6 %** | **verworfen** (kippt im Bärenregime) |
+| Illiquide (ADV niedrig) | +2,9 %, t=2,07 | +2,9 % | +3,7 % | **verworfen** (netto −2,4 % nach Spreads) |
+| Hoch-Beta | +2,9 %, t=2,00 | +1,5 % | +3,4 % | **verworfen** (= mehr Beta, fällt durch BH) |
+| Standard Review | +2,3 %, t=1,91 | +1,0 % | **−11,6 %** | **verworfen** (kippt; Coverage 24 %) |
+| Relative Stärke vs. XBI | +1,7 %, t=1,36 | −1,8 % | +1,4 % | **verworfen** (kippt OOS) |
+| ML-Logistic-Selektion | AUC 0,57 | +0,14 % netto (≈0) | — | **verworfen** (nicht signifikant) |
+
+Über **10.054 Kombinationen + 33 Cluster + 35 univariate Hypothesen + 3 ML-Modelle** hinweg: **0 Überlebende** nach Multiple-Testing + Hold-out + Kosten.
 
 ---
 

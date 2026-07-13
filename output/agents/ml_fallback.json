@@ -1,0 +1,20 @@
+{
+  "logistic": {
+    "oos_auc": 0.571,
+    "sel_net_excess": 0.0014,
+    "full_net_excess": -0.0081,
+    "shuffle_auc_mean": 0.51
+  },
+  "random_forest": {
+    "oos_auc": 0.408,
+    "sel_net_excess": -0.0092,
+    "full_net_excess": -0.0081,
+    "shuffle_auc_mean": 0.497
+  },
+  "hist_gb": {
+    "oos_auc": 0.402,
+    "sel_net_excess": -0.0054,
+    "full_net_excess": -0.0081,
+    "shuffle_auc_mean": 0.487
+  }
+}
