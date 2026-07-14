@@ -1,0 +1,802 @@
+[
+ {
+  "agent": 6,
+  "klasse": "Aktienrückkäufe",
+  "strategie": "Net Share Issuance / Net Payout Yield (Composite Issuance)",
+  "urteil": "CANDIDATE",
+  "p_echte_ineffizienz": 0.55,
+  "netto_sharpe": "0.2-0.4",
+  "kernrisiko": "Der überwiegende Teil des Alphas stammt aus der Short-/Untergewichtungs-Seite (Vermeidung von Emittenten/SEO-Firmen), nicht aus reinem Long-Exposure auf Rückkäufer. Als 'reine Buyback-Strategie' isoliert schwächer als das kombinierte Netto-Payout-Signal. Crowding seit ca. 2010 durch Verbreitung in Quality-/Investment-Faktorprodukten; vorbörslicher Struktur-Bruch 1970 (Signifikanz nur post-1970, konsistent mit SEC Rule 10b-18 von 1982 als Katalysator der modernen Buyback-Welle).",
+  "testbar": "ja",
+  "datenquelle": "Chen & Zimmermann Open Source Asset Pricing (GitHub OpenSourceAP/CrossSection) - Signale 'NetPayoutYield' und 'CompositeIssuance' als fertige Long-Short-Portfoliorenditen kostenlos abrufbar",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 4,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 4,
+   "kapazitaet": 4,
+   "kostenrobustheit": 4
+  },
+  "mandats_score": 3.5
+ },
+ {
+  "agent": "08",
+  "klasse": "IPOs",
+  "strategie": "IPO-Underpricing / Erstzeichnungsrendite (Winner's-Curse-Rente)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.85,
+  "netto_sharpe": "0.2-0.5 NUR bei systematischem Zuteilungszugang (Prime-Broker/Underwriter-Beziehung); ~0 ohne Zugang",
+  "kernrisiko": "Kein Marktzugang zu Zuteilungen für Outsider (Rock 1986 Winner's Curse); Effekt ist eine Zuteilungs-/Beziehungsrente für bevorzugte institutionelle Kunden, keine im offenen Markt handelbare Ineffizienz",
+  "testbar": "ja",
+  "datenquelle": "Jay-Ritter-IPO-Dataset (Underpricing-Tabellen), site.warrington.ufl.edu/ritter/ipo-data",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 3.4
+ },
+ {
+  "agent": 11,
+  "klasse": "Faktorprämien (Value/Profitability/Investment/Quality)",
+  "strategie": "Profitabilitäts-/Qualitätsprämie (Gross Profitability RMW / QMJ)",
+  "urteil": "CANDIDATE",
+  "p_echte_ineffizienz": 0.4,
+  "netto_sharpe": "0.2-0.4",
+  "kernrisiko": "Mehrjährige Underperformance in spekulativen 'Junk-Rallyes' (2020/21 Reopening-Trade, 2024/25 KI-Boom bei unprofitablen Wachstumswerten); hohe Faktorüberlappung mit Value/Low-Vol; Grenzfall ob echte Ineffizienz oder Leverage-Constraint-Risikoprämie (BAB-Logik)",
+  "testbar": "ja",
+  "datenquelle": "Ken French Data Library: RMW (Robust Minus Weak); AQR 'Quality Minus Junk' Factors Monthly (aqr.com, kostenlos, seit 1957 bzw. global seit 1986)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 5,
+   "kapazitaet": 5,
+   "kostenrobustheit": 4
+  },
+  "mandats_score": 3.2
+ },
+ {
+  "agent": 10,
+  "klasse": "Saisonalitäten",
+  "strategie": "Halloween-Effekt / Sell-in-May (Bouman & Jacobsen)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0.0-0.2 langfristig gepoolt international; in mehreren Einzelmärkten 2014-2025 negativ ggü. Buy-and-Hold",
+  "kernrisiko": "Strategie verzichtet 6 Monate auf Aktienrisikoprämie -> hohe Opportunitätskosten in strukturellen Bullenphasen (genau das ist seit ca. 2012 eingetreten); Pfadabhängigkeit: einzelne 'falsche' Sommer-Rally oder Winter-Crash kann Mehrjahresvorsprung auslöschen",
+  "testbar": "ja",
+  "datenquelle": "Ken French Mkt-RF (US, monatlich) + MSCI-Länderindizes via Yahoo Finance für internationale Tests",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 5,
+   "kapazitaet": 5,
+   "kostenrobustheit": 4
+  },
+  "mandats_score": 3.0
+ },
+ {
+  "agent": 14,
+  "klasse": "Cross-Sectional Momentum",
+  "strategie": "12-1 Preis-Momentum (Winners-minus-Losers, Jegadeesh-Titman-Standard)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.45,
+  "netto_sharpe": "0.15-0.35 unmanaged; siehe Kandidat 2 fuer risikogemanagte Variante",
+  "kernrisiko": "Linksschiefe Crash-Tail bei V-foermigen Markterholungen nach Abverkaeufen (1932, 2009, 2020, Jan/Jun-Jul 2026); Crowding verstaerkt genau dieses Muster",
+  "testbar": "ja",
+  "datenquelle": "Ken French Data Library: 'Momentum Factor (Mom)' bzw. '10 Portfolios Formed on Momentum', monatlich seit 1927",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 4,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 3,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 2.9
+ },
+ {
+  "agent": 3,
+  "klasse": "Insiderkäufe",
+  "strategie": "Opportunistische (non-routine) Insider-Käufe vs. Routine-Käufe",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.55,
+  "netto_sharpe": "0.1-0.3",
+  "kernrisiko": "Alpha konzentriert sich in kleinen, illiquiden, lokal/schlecht-governance-geprägten Titeln; Kosten und realistische Positionsgrößen fressen den Großteil der Bruttorendite auf",
+  "testbar": "ja",
+  "datenquelle": "SEC EDGAR Form 4 / SEC DERA 'Insider Transactions' Structured Data Sets (kostenlos, kein Ken-French-Datensatz)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.8
+ },
+ {
+  "agent": 14,
+  "klasse": "Cross-Sectional Momentum",
+  "strategie": "Residual-/Idiosynkratisches Momentum mit Volatility-Scaling (Blitz/Huij/Martens + Barroso/Santa-Clara)",
+  "urteil": "CANDIDATE",
+  "p_echte_ineffizienz": 0.5,
+  "netto_sharpe": "0.30-0.50, mit Vol-Scaling in ruhigen Regimen ggf. hoeher; Tail-Risiko reduziert, nicht eliminiert",
+  "kernrisiko": "Faktor-Crowding (Hedgefonds-Momentum-Positionierung lt. Goldman Sachs Juli 2026 im 92. Perzentil der letzten 5 Jahre) plus Konstruktions-/Kapazitaetsgrenzen; Vol-Scaling mindert, verhindert aber keine Crashes wie Nov. 2020",
+  "testbar": "ja",
+  "datenquelle": "Ken-French 'F-F Research Data 5 Factors (2x3)' fuer Residuenberechnung + freie Einzelkursdaten (z.B. Stooq); kein fertiges Ken-French Residual-Momentum-Dataset vorhanden",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 4,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 2.8
+ },
+ {
+  "agent": 2,
+  "klasse": "Analystenrevisionen",
+  "strategie": "Analysten-EPS-Prognoserevisionen (Consensus Earnings Forecast Revisions / 'dEf', 'Re')",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.45,
+  "netto_sharpe": "0.1-0.3",
+  "kernrisiko": "Hoher Portfolio-Turnover durch haeufige Konsensus-Updates; Konzentration in Small/Mid Caps mit geringer Coverage begrenzt Kapazitaet; substanzielle Ueberlappung mit Preis-/Earnings-Momentum erschwert Nachweis von inkrementellem Signal nach Kosten.",
+  "testbar": "ja",
+  "datenquelle": "Open Source Asset Pricing (Chen & Zimmermann, openassetpricing.com) - Signal 'REV6'/'ChgEarnings'/'dEf' Portfolio-Returns (Signal-Rohdaten stammen aus IBES, aber prozessierte Faktor-Returns sind frei abrufbar)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 4,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.7
+ },
+ {
+  "agent": 7,
+  "klasse": "Secondary Offerings / Net Share Issuance",
+  "strategie": "Net Share Issuance (NSI) – Cross-sectional Signal, monatlich rebalanciert",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.45,
+  "netto_sharpe": "0.15-0.30 long-short institutionell; nach Crowding/Borrow-Kosten eher unteres Ende",
+  "kernrisiko": "Alpha schrumpft auf Grenzsignifikanz nach Risikoadjustierung mit Investment-Faktor (Hou/Xue/Zhang 2020: q-Faktor-Alpha t=-1.85 vs. Rohspanne t=-3.16); rational-erklärbar via q-Theorie (Li/Livdan/Zhang 2009), nicht eindeutig Mispricing; Short-Bein konzentriert in schwer/teuer leihbaren Small-/Microcap-Emittenten.",
+  "testbar": "ja",
+  "datenquelle": "Open Source Asset Pricing (Chen & Zimmermann, openassetpricing.com) Portfolio-Returns 'NetEquityFinance'/'ChNetIssue' (kostenlos); kein exaktes Ken-French-Pendant, CMA-Faktor (FF5) nur grobe Proxy",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 3,
+   "kapazitaet": 3,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 2.7
+ },
+ {
+  "agent": 10,
+  "klasse": "Saisonalitäten",
+  "strategie": "Cross-sektionale Kalendersaisonalität (Heston-Sadka 'Own-Month'-Effekt)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.45,
+  "netto_sharpe": "0.1-0.3 brutto; keine dokumentierte Netto-Sharpe nach realistischen Kosten auffindbar, Unsicherheit hoch",
+  "kernrisiko": "Konzentration in Small-/Micro-Caps mit Leerverkaufsbeschränkungen; monatlicher Vollrebalance der gesamten Cross-Section treibt Turnover/Kosten stark; kein etabliertes Risikomodell erklärt den Effekt -> Restunsicherheit ob doch Kompensation für unbeobachtetes Risiko statt reiner Ineffizienz",
+  "testbar": "ja",
+  "datenquelle": "Ken French 25 Size-BM- bzw. 10 Momentum-Portfolios (monatlich, seit 1926) als Näherung; für echte Einzeltitel-Replikation WRDS/CRSP nötig (nicht frei)",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 4,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.7
+ },
+ {
+  "agent": 11,
+  "klasse": "Faktorprämien (Value/Profitability/Investment/Quality)",
+  "strategie": "Value-Prämie (HML / Book-to-Market, inkl. moderner Value-Varianten)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0.1-0.3",
+  "kernrisiko": "Mehrjähriger, potenziell jahrzehntelanger Drawdown bei strukturellem Regimewechsel (Intangibles-Ökonomie, tiefe Realzinsen, KI-Mega-Cap-Konzentration); FF5 macht HML statistisch redundant; >100 Mrd. USD Smart-Beta-Crowding",
+  "testbar": "ja",
+  "datenquelle": "Ken French Data Library: HML (Value) Factor, monatlich/täglich, seit 1926, plus 'Portfolios Formed on Book-to-Market'",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 5,
+   "kapazitaet": 5,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 2.7
+ },
+ {
+  "agent": 12,
+  "klasse": "Volatilitätsanomalien (Low-Vol/BAB/IVOL)",
+  "strategie": "Low-Volatility / Minimum-Variance Long-Only Aktienstrategie",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "0.1-0.3 absolut; kaum inkrementell ggü. Quality/Value-Sleeve",
+  "kernrisiko": "Novy-Marx (2014) 'Understanding Defensive Equity': Effekt weitgehend Repackaging von Profitability- und Value-Exposure ohne eigenständiges Alpha; strukturelle Underperformance in Growth-/Momentum-Bullenmärkten (2020, 2023-2024); Crowding durch >100 Mrd. USD Low-Vol-ETF-AUM seit 2011",
+  "testbar": "ja",
+  "datenquelle": "Ken French '10 Portfolios Formed on Variance' bzw. Beta-sortierte Portfolios; Tickerproxy USMV/SPLV/XMLV",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 4,
+   "kapazitaet": 4,
+   "kostenrobustheit": 4
+  },
+  "mandats_score": 2.7
+ },
+ {
+  "agent": 7,
+  "klasse": "Secondary Offerings / Net Share Issuance",
+  "strategie": "Composite Equity Issuance (CEI) – Intangible-Return-Signal",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.4,
+  "netto_sharpe": "0.10-0.30",
+  "kernrisiko": "Hohe Korrelation mit NSI und Asset Growth (gemeinsame Ladung auf Stambaugh-Yuan MGMT-Mispricing-Cluster) -> kaum inkrementelle Diversifikation zu Candidate 2 und zu bereits verbreiteten Quality/Investment-Faktoren; behaviorale 'Overreaction-to-Intangible-Information'-Interpretation konkurriert mit rationaler q-Theorie-Erklärung.",
+  "testbar": "ja",
+  "datenquelle": "Open Source Asset Pricing (Chen & Zimmermann) Portfolio-Returns 'CompEquIss' (kostenlos)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 3,
+   "kapazitaet": 3,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 2.6
+ },
+ {
+  "agent": 10,
+  "klasse": "Saisonalitäten",
+  "strategie": "Turn-of-the-Month (TOM) Effekt",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "0.0-0.2 in entwickelten Märkten nach Kosten; ggf. 0.2-0.4 in ausgewählten Schwellenländern vor Kapazitätsgrenzen",
+  "kernrisiko": "Effekt in liquiden Industrieländer-Märkten bereits weitgehend arbitriert/verschwunden (Decay auf ~0 in US-ETFs seit ca. 2015); Fensterspezifikation (-1 bis +3 Handelstage) selbst Ergebnis von Data-Mining über viele getestete Fensterlängen",
+  "testbar": "ja",
+  "datenquelle": "Ken French Daily Factors (Mkt-RF, Tagesfrequenz) + Yahoo-Finance-Tagesdaten SPY/IWM/internationale ETFs",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 4,
+   "kapazitaet": 3,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.6
+ },
+ {
+  "agent": 1,
+  "klasse": "Earnings Drift (PEAD)",
+  "strategie": "Preis- + Earnings-Momentum kombiniert (Chan/Jegadeesh/Lakonishok 1996)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "0.15-0.35 (als Overlay auf Preis-Momentum-Faktor, nicht standalone)",
+  "kernrisiko": "Erbt Crash-Risiko von Preis-Momentum (Momentum-Crashes 2009, negative Skew); ist Teil eines der meist-gehandelten Faktoren weltweit -> hohes Crowding-Risiko; Zusatzbeitrag von Earnings-Signal ueber reines Preis-Momentum hinaus ist klein und schwer sauber zu isolieren.",
+  "testbar": "ja",
+  "datenquelle": "Ken French Data Library: 'Momentum Factor (Mom)' als Preis-Momentum-Baseline; Earnings-Komponente erfordert IBES/Compustat",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 3,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 2.5
+ },
+ {
+  "agent": "08",
+  "klasse": "IPOs",
+  "strategie": "Lock-up-Expiry-Effekt (Insider-Verkaufsdruck bei Lock-up-Ablauf)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.5,
+  "netto_sharpe": "-0.1 bis 0.2, extrem titelspezifisch; im Median nahe null bis negativ nach Borrow-Kosten",
+  "kernrisiko": "Lock-up-Termine sind öffentlich und lange im Voraus bekannt (S-1/424B4); Stock-Loan-Desks antizipieren den Verkaufsdruck und treiben Borrow-Fees (Ø ~15% p.a. bei kleinem Float/hoher Nachfrage, Spitzen >100% p.a. z.B. Beyond Meat) bereits vor dem Event hoch, was die ca. -1.5%-3-Tage-Bruttorendite größtenteils bis vollständig auffrisst",
+  "testbar": "nein",
+  "datenquelle": "Lock-up-Termine aus SEC EDGAR (S-1/424B4) frei verfügbar; Borrow-Fee-/Short-Interest-Daten (IHS Markit, S3 Partners) sind kostenpflichtig und für den entscheidenden Netto-Test nötig",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 2.5
+ },
+ {
+  "agent": "09",
+  "klasse": "Reverse Splits",
+  "strategie": "Post-Reverse-Split Short-Drift (Short reverse-gesplitteter Aktien nach Ex-Datum, 6-36 Monate)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.45,
+  "netto_sharpe": "0.0-0.2 nach realistischen Kosten; brutto ggf. 0.3-0.5",
+  "kernrisiko": "Borrow-Kosten/Non-Availability und FINRA-4210-Margin bei Sub-5-USD-Aktien fressen die Prämie genau in dem Segment, in dem der Effekt am größten ist; Short-Squeeze- und Buy-in-Risiko bei dünnem Float bei gleichzeitig extrem geringer Kapazität.",
+  "testbar": "nein",
+  "datenquelle": "SEC EDGAR Full-Text-Search (8-K Item 5.03) fuer Event-Identifikation + Stooq/Yahoo Finance fuer Kurse (kein Ken-French- oder Standard-Datensatz verfuegbar, da keine etablierte Faktor-Anomalie)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.4
+ },
+ {
+  "agent": 15,
+  "klasse": "Mean Reversion / Short-Term Reversal",
+  "strategie": "Pairs Trading (Distance-Methode, Gatev/Goetzmann/Rouwenhorst)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "0,0-0,3 netto, mit dokumentiertem monotonem Decay seit den 1960ern; punktuell hoehere Renditen in Krisen (2007-09), aber Tail-Risiko durch korrelierte Unwinds (August 2007)",
+  "kernrisiko": "Dokumentierter Decay von 0,86%/Monat (1962-88) auf 0,24%/Monat (2003-09), ca. 70% davon durch steigendes Arbitragerisiko (nicht-konvergierende Paare); zusaetzlich Crowding-/Unwind-Tail-Risiko wie im Quant Quake August 2007.",
+  "testbar": "ja",
+  "datenquelle": "Kursdaten beliebiger Aktienpaare via Yahoo Finance/Stooq (z.B. KO/PEP, XOM/CVX); Distance-Methode ist selbst nachbaubar, kein vorgefertigter Ken-French-Datensatz vorhanden",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.3
+ },
+ {
+  "agent": 2,
+  "klasse": "Analystenrevisionen",
+  "strategie": "Analysten-Empfehlungsrevisionen (Konsensus-Recommendation Upgrades/Downgrades)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "0.0-0.2",
+  "kernrisiko": "Barber/Lehavy/McNichols/Trueman (2001) zeigen explizit: tägliches Rebalancing noetig fuer Bruttoalpha >4%/Jahr, Nettorendite nach Kosten 'not reliably greater than zero'. Zusaetzlich Short-Squeeze-/Crowding-Risiko auf der Downgrade-Short-Seite in Melt-up-Regimen.",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 2.2
+ },
+ {
+  "agent": 6,
+  "klasse": "Aktienrückkäufe",
+  "strategie": "Open-Market-Buyback-Ankündigungs-Drift (Long-Run BHAR, Value-Subsample)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "0.1-0.3",
+  "kernrisiko": "Prozyklizität: Buyback-intensive Firmen sind bei Kredit-/Liquiditätsschocks überproportional exponiert, weil Managements Rückkäufe genau dann aussetzen, wenn die Value-Stütze am nötigsten wäre (2008, 2020). Zusätzlich uneinheitliche Post-2000-Evidenz: Fu & Huang (2016) finden die Anomalie für 2003-2012 verschwunden, Peyer & Vermaelen (2009) finden sie bis 2001 intakt; internationale Evidenz (Manconi/Peyer/Vermaelen 2019) stützt Persistenz außerhalb der USA.",
+  "testbar": "nein",
+  "datenquelle": "SEC EDGAR Volltextsuche (8-K Item 8.01, 10-Q Item 703) - nur ab ca. 2001 vollständig, keine kuratierte Ken-French-Reihe verfügbar; für Vollreplikation wird SDC Platinum/WRDS (kostenpflichtig) benötigt",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 3,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.2
+ },
+ {
+  "agent": 15,
+  "klasse": "Mean Reversion / Short-Term Reversal",
+  "strategie": "Statistische Arbitrage / Residual- und Industrie-Reversal (faktor-neutral, PCA-basiert)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0,1-0,3 netto fuer portfolio-/industriebasierte Low-Turnover-Varianten; nahe 0 fuer hochfrequente Einzeltitel-PCA-Residual-Varianten ausserhalb einer HFT-Infrastruktur",
+  "kernrisiko": "Belastbarste Evidenz fuer die kostenguenstigere Industrie-Variante stammt teils aus Practitioner-/Produktresearch (Interessenkonflikt); die granulare PCA-Residual-Variante teilt das Kostenproblem von Kandidat 1; gleiches Crowding-/Tail-Risikoprofil wie Pairs Trading.",
+  "testbar": "ja",
+  "datenquelle": "Ken French Data Library: 12/49 Industry Portfolios (taeglich) fuer Industrie-Reversal-Replikation; PCA-Faktoren aus CRSP/Yahoo-Kursmatrix selbst konstruierbar",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 3,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.2
+ },
+ {
+  "agent": 4,
+  "klasse": "Spin-offs & Abspaltungen",
+  "strategie": "Post-Spin-off Kursdrift der abgespaltenen Tochtergesellschaft (Spinoff Subsidiary Drift)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0.0-0.2",
+  "kernrisiko": "Rechtsschiefe Renditeverteilung (Median bei 36 Monaten negativ trotz positivem Mittelwert); negatives Crash-Beta (2008: ETF -55.2%, Subsidiary-Basket -41.1% vs. Markt -38.1%); reales investierbares Vehikel (CSD-ETF) zeigt seit ca. 2013 Konvergenz auf Marktrendite netto Kosten",
+  "testbar": "ja",
+  "datenquelle": "CSD (Invesco/Guggenheim S&P Spin-Off ETF, Kurshistorie z.B. Yahoo Finance) als investierbarer Proxy; Ken-French 25 Size-B/M-Portfolios als Benchmark",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.0
+ },
+ {
+  "agent": 11,
+  "klasse": "Faktorprämien (Value/Profitability/Investment/Quality)",
+  "strategie": "Investment-Prämie (CMA / Asset Growth)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.25,
+  "netto_sharpe": "0.0-0.2",
+  "kernrisiko": "Weitgehend redundant zu Value/Profitability (Korrelation zu HML ≈0.7 in FF2015); Signal eng an Kapitalmaßnahmen (SEOs/Buybacks) gekoppelt → höhere Handelskosten bei kleineren/illiquideren Emittenten; hohe Ausfallrate bei Multiple-Testing-Korrektur (Hou/Xue/Zhang 2020)",
+  "testbar": "ja",
+  "datenquelle": "Ken French Data Library: CMA (Conservative Minus Aggressive)",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 3,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.0
+ },
+ {
+  "agent": 3,
+  "klasse": "Insiderkäufe",
+  "strategie": "Cluster-Käufe mehrerer Insider/Executives (koordiniertes Kaufsignal)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.4,
+  "netto_sharpe": "0.0-0.2",
+  "kernrisiko": "Dünne akademische Evidenzbasis (im Kern 1-2 Studien), Cluster-Events sind selten und noch stärker auf Microcaps konzentriert als das Basissignal -> Kapazität praktisch null",
+  "testbar": "ja",
+  "datenquelle": "SEC EDGAR Form 4 (Multi-Insider-Aggregation pro CIK/Ticker selbst konstruiert)",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.9
+ },
+ {
+  "agent": 12,
+  "klasse": "Volatilitätsanomalien (Low-Vol/BAB/IVOL)",
+  "strategie": "Betting Against Beta (BAB) – gehebelte Long-Low-Beta/Short-High-Beta-Faktorstrategie",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0.0-0.2 (institutionell umsetzbar, gehebelt, nach Fundingkosten/Shortkosten)",
+  "kernrisiko": "Konstruktionsartefakt: Rank-Weighting erzeugt de-facto Gleichgewichtung mit massivem Microcap-Tilt (Novy-Marx & Velikov 2022: ~1,05 USD je investiertem Dollar in unterstes 1% Marktkap.-Perzentil); Alpha weitgehend durch Profitability-/Investment-Exposure erklärbar; Sensitivität ggü. Fundingkosten/Zinsregime",
+  "testbar": "ja",
+  "datenquelle": "AQR 'Betting Against Beta: Equity Factors' (monthly/daily, offen abrufbar); ergänzend CRSP-Beta-Dezile / Ken-French-Beta-Portfolios als Näherung",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.9
+ },
+ {
+  "agent": 13,
+  "klasse": "Liquiditätsanomalien",
+  "strategie": "Pastor-Stambaugh systematischer Liquiditätsrisikofaktor (LIQ, Beta-Sortierung)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.25,
+  "netto_sharpe": "0.1-0.3 brutto; ca. 0.0-0.15 netto nach Crowding/Kosten",
+  "kernrisiko": "Post-Publication-Replikation (Pontiff & Singla 2019) zeigt fragile Identifikation; Prämie lädt konzentriert auf Krisenperioden (2008), genau wenn Liquiditätsspiralen Diversifikation zerstören",
+  "testbar": "ja",
+  "datenquelle": "Pastor-Stambaugh Liquidity Factor (frei auf L. Pástors Faculty-Website, monatliche Reihe seit 1962), ergänzend Ken-French 5-Faktoren + Momentum",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 1.9
+ },
+ {
+  "agent": 1,
+  "klasse": "Earnings Drift (PEAD)",
+  "strategie": "Analysten-basierte SUE / kombinierte Signale (Livnat & Mendenhall 2006; Brandt/Kishore/Santa-Clara/Venkatachalam 2008, EAR+SUE)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.25,
+  "netto_sharpe": "0.1-0.25",
+  "kernrisiko": "Groessenordnung staerker als Zeitreihen-SUE, aber auf gleiche illiquide Universum-Konzentration und gleiche Limits-to-Arbitrage angewiesen; kaum unabhaengige Post-Publication-OOS-Studien; Look-ahead-Risiko durch IBES-Punkt-in-Zeit-Datenqualitaet vor Mitte-1990er.",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.8
+ },
+ {
+  "agent": 3,
+  "klasse": "Insiderkäufe",
+  "strategie": "Klassisches aggregiertes Insider-Kauf-Signal (Insider-Sentiment, Lakonishok/Lee-Typ)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "0.0-0.1",
+  "kernrisiko": "Seit Sarbanes-Oxley (2-Tage-Meldepflicht ab 2002) und massiver Kommerzialisierung des Signals (Retail-Apps, Insider-Tracker) strukturell arbitriert; internationale Replikation (UK) findet netto negative Renditen",
+  "testbar": "ja",
+  "datenquelle": "SEC EDGAR Form 4 / OpenInsider (Scraping, kostenlos, inoffiziell)",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.8
+ },
+ {
+  "agent": "09",
+  "klasse": "Reverse Splits",
+  "strategie": "Serielle/multiple Reverse Splits als verstaerktes Distress-Short-Signal",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "~0.0 bis leicht negativ nach Kosten",
+  "kernrisiko": "Genau die Untergruppe mit dem staerksten dokumentierten Effekt (Crutchley/Swidler: 65% Delisting/Liquidation) ist laut Originalstudie selbst noch illiquider als einfache Reverse-Split-Titel; oft kein Borrow verfuegbar, Trading-Halts und Uplisting-Verlust (OTC/Pink) schneiden Prime-Broker-Shortability exakt dann ab, wenn die These greifen wuerde.",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 1,
+   "kapazitaet": 1,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.8
+ },
+ {
+  "agent": 15,
+  "klasse": "Mean Reversion / Short-Term Reversal",
+  "strategie": "Kurzfristiges Cross-Sectional Reversal (Wochen-/Monatsfrequenz, Einzelaktien)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "≈0,0 bis leicht negativ fuer Nicht-Marktmacher nach realistischen Kosten; nur fuer registrierte HFT-Marktmacher mit Rebates/Kolokation potenziell hoch, aber dann kein Alpha-Signal mehr sondern Marktmaking-Geschaeftsmodell",
+  "kernrisiko": "Bruttorendite ist zu 50-80% Bid-Ask-Bounce/Liquiditaetskompensation und Lead-Lag-Artefakt (Lo/MacKinlay 1990); Effekt konzentriert exakt in den Aktien (klein, illiquide, hoher Spread), in denen Transaktionskosten das Signal auffressen. Seit Dezimalisierung (2001) und Aufstieg von HFT-Marktmachern ist die fuer Aussenstehende handelbare Nettorendite auf praktisch Null gefallen.",
+  "testbar": "ja",
+  "datenquelle": "Ken French Data Library: Short-Term Reversal Factor (ST_Rev), monatlich ab 1926; fuer Wochenfrequenz zusaetzlich CRSP/Yahoo-Finance-Kursdaten noetig",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 4,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 1,
+   "kapazitaet": 1,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.8
+ },
+ {
+  "agent": "08",
+  "klasse": "IPOs",
+  "strategie": "Langfristige IPO-Underperformance / 'New Issues Puzzle'",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.2,
+  "netto_sharpe": "0.0-0.1, nach Faktorkontrolle nicht von generischem Size-/Quality-/Junk-Exposure unterscheidbar",
+  "kernrisiko": "Effekt kehrt sich um bzw. verschwindet fast vollständig, wenn ab Erstausgabepreis statt Erstschlusskurs gemessen wird, und wenn für Size/B-M/Quality-Minus-Junk kontrolliert wird (Brav & Gompers 1997; Carter, Dark & Sapp 2011; Asness et al. QMJ). Kein eigenständiger Anomalie-Kern übrig.",
+  "testbar": "ja",
+  "datenquelle": "Jay-Ritter Long-run-Return-Tabellen + Ken-French-Data-Library (SMB, HML, RMW, CMA)",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.7
+ },
+ {
+  "agent": "09",
+  "klasse": "Reverse Splits",
+  "strategie": "Regulaerer (Forward) Stock-Split Long-Drift (Kontrastkandidat, long)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "~0.0",
+  "kernrisiko": "Effekt verschwindet bei methodisch sauberer Messung ab Ex-Datum statt Ankuendigungsdatum (Byun/Rozeff 2003, n=12.747); klassisches Artefakt langfristiger BHAR-Event-Studies (Benchmark-/Skewness-Bias, Fama 1998, Mitchell/Stafford 2000).",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 4,
+   "kapazitaet": 3,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.7
+ },
+ {
+  "agent": 2,
+  "klasse": "Analystenrevisionen",
+  "strategie": "Kursziel-Revisionen (Analyst Target Price Changes)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "0.0-0.1 (vermutlich ~0)",
+  "kernrisiko": "Analysten-Overoptimism-Bias (im Schnitt implizieren 12-Monats-Kursziele ~28% Kurssteigerung, die selten erreicht wird) verzerrt das Level-Signal; die Revisions-Komponente ist stark kollinear mit Recommendation- und EPS-Revisionen, daher fraglich ob eigenstaendiger inkrementeller Wert; duenne unabhaengige Post-Publication-Replikationsbasis als Standalone-Faktor.",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.5
+ },
+ {
+  "agent": 4,
+  "klasse": "Spin-offs & Abspaltungen",
+  "strategie": "Post-Spin-off Kursdrift des Mutterkonzerns (Parent Drift)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.05,
+  "netto_sharpe": "~0.0",
+  "kernrisiko": "Kein robuster Effekt außerhalb der Originalstichprobe; Originalergebnis nachweislich durch einen einzelnen Extremausreißer getrieben (McConnell/Ovtchinnikov 2004); in jeder Out-of-Sample-Replikation seit 2001 statistisch insignifikant bzw. sogar negativ im Punktschätzer (t=-0.48 bis 0.72)",
+  "testbar": "ja",
+  "datenquelle": "Ken-French 25 Size-B/M-Portfolios + manuell erhobene Parent-Ticker via SEC EDGAR (Form 10 / 8-K); CRSP-Distributionsdatei selbst nicht frei verfügbar",
+  "scores": {
+   "reproduzierbarkeit": 1,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 4,
+   "kapazitaet": 4,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.5
+ },
+ {
+  "agent": 6,
+  "klasse": "Aktienrückkäufe",
+  "strategie": "Actual-Repurchase-Informativeness / Ist-Rückkauf-Signal (Buy-the-Dip via Quartalsdisclosure)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "0.0-0.15 (nach Kosten vermutlich ~0)",
+  "kernrisiko": "Strukturelle Informationsverzögerung: Ist-Rückkaufvolumina werden nur quartalsweise (10-Q Item 703) offengelegt; sobald der Datenpunkt öffentlich ist, hat der Markt längst reagiert. Die von der SEC 2023 beschlossene schnellere Offenlegungspflicht wurde im Dezember 2023 vom 5th Circuit annulliert - die Latenz bleibt strukturell hoch, keine Verbesserung in Sicht.",
+  "testbar": "nein",
+  "datenquelle": "SEC EDGAR Financial Statement Data Sets (XBRL, kostenlos, aber sehr aufwändige Rohdaten-Aufbereitung nötig) - '-'",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.4
+ },
+ {
+  "agent": 7,
+  "klasse": "Secondary Offerings / Net Share Issuance",
+  "strategie": "SEO Event-Study Langfrist-Underperformance (Buy-and-Hold, 3-5 Jahre nach Emission)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "~0.0 (statistisch nicht von Null unterscheidbar nach Kalenderzeit-Korrektur)",
+  "kernrisiko": "Methodenartefakt: naive Buy-and-Hold-Abnormal-Return-Tests sind statistisch invalide (Mitchell & Stafford 2000); Effekt verschwindet in Kalenderzeit-3-Faktor-Regressionen und ist nicht von Size-/BM-Faktorexposure unterscheidbar (Brav, Geczy & Gompers 2000).",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.4
+ },
+ {
+  "agent": 1,
+  "klasse": "Earnings Drift (PEAD)",
+  "strategie": "Klassische SUE-Preis-Drift (Bernard & Thomas 1989, decile-basiert)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "0.0-0.2 (nach realistischen Kosten, groesstenteils nicht von Null unterscheidbar)",
+  "kernrisiko": "Effekt ist zu >90% in illiquiden Small-/Microcaps konzentriert; verschwindet in liquiden Value-Weighted-Tests (Hou/Xue/Zhang t=1.0-1.65) und wird von Transaktionskosten aufgezehrt (Chordia et al. 2009: 0.04%/Monat in liquidesten vs. 2.43%/Monat in illiquidesten Quintilen).",
+  "testbar": "ja",
+  "datenquelle": "Ken French Data Library hat kein direktes SUE-Portfolio; naeherungsweise ueber Chen&Zimmermann Open Source Asset Pricing (Signal 'Sue') / WRDS IBES+Compustat noetig; grob approximierbar mit Earnings-Momentum-Proxy aus Compustat-Quartalsdaten",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.3
+ },
+ {
+  "agent": 12,
+  "klasse": "Volatilitätsanomalien (Low-Vol/BAB/IVOL)",
+  "strategie": "Idiosynkratische Volatilität (IVOL) – Ang, Hodrick, Xing, Zhang (2006)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.2,
+  "netto_sharpe": "~0.0 nach Kosten, ggf. negativ auf der Short-Seite",
+  "kernrisiko": "Effekt konzentriert in kleinen, illiquiden, schwer/teuer shortbaren 'Lottery'-Aktien; durch MAX-Faktor (Bali/Cakici/Whitelaw 2011) und 1-Monats-Reversal/Mikrostruktur (Huang et al. 2010) größtenteils subsumiert bzw. erklärt; Vorzeichenrichtung methodenabhängig (Fu 2009 EGARCH-Kontroverse)",
+  "testbar": "ja",
+  "datenquelle": "- (kein direkter Ken-French-Datensatz; selbst konstruierbar aus FF3/FF5-Residuen auf CRSP-Basis)",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 1,
+   "kapazitaet": 1,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.3
+ },
+ {
+  "agent": 13,
+  "klasse": "Liquiditätsanomalien",
+  "strategie": "Liquiditätsprovision / Market-Making-Renditen (kurzfristige Reversal als Proxy, Nagel 2012)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.2,
+  "netto_sharpe": "<0 nach Kosten für Nicht-HFT-Akteure ohne Speed-/Rebate-Vorteil; für Mandat nicht als Faktor-Anomalie handelbar",
+  "kernrisiko": "Ist strukturell kein Alpha-Faktor sondern ein Infrastruktur-/Geschwindigkeitsgeschäft (Kolokation, Maker-Rebates); für Fonds ohne diese Infrastruktur ist die 'Prämie' reiner Bid-Ask-Bounce, der beim Ausführen verschwindet",
+  "testbar": "ja",
+  "datenquelle": "Ken-French Short-Term-Reversal-Faktor (ST_Rev) als grobe Näherung, keine echte Market-Making-P&L-Reihe frei verfügbar",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 1,
+   "kapazitaet": 1,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.3
+ },
+ {
+  "agent": 13,
+  "klasse": "Liquiditätsanomalien",
+  "strategie": "Amihud-Illiquiditätsprämie (charakteristikbasiert, ILLIQ-Sortierung)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "0.0-0.15 nach realistischen Kosten in institutioneller Größe",
+  "kernrisiko": "Prämie ist überwiegend unrealisierte Handelskostenkompensation; nach Slippage/Market Impact in genau den Titeln, die die Prämie erzeugen, verschwindet der Netto-Effekt",
+  "testbar": "ja",
+  "datenquelle": "Eigenkonstruktion ILLIQ = |Rendite|/Dollarvolumen aus Yahoo Finance/Stooq Tagesdaten; keine offizielle Ken-French-Reihe",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.2
+ }
+]

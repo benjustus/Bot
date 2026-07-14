@@ -265,10 +265,39 @@ def build_strategies():
     return S
 
 
+def reality_check(strategies, results, n=2000, block=12):
+    """White's-Reality-Check-Variante: Verteilung des MAX-Newey-West-t ueber
+    alle Strategien unter H0 (demeaned Post-Pub-Reihen, unabhaengiger
+    Block-Bootstrap je Strategie -> konservative Max-Verteilung)."""
+    series = []
+    for (name, s, py, c), r in zip(strategies, results):
+        oos = s.dropna()
+        oos = oos[oos.index.year > py].values
+        if len(oos) >= 36:
+            series.append(oos - oos.mean())
+    max_t = np.empty(n)
+    for i in range(n):
+        ts = []
+        for x in series:
+            T = len(x)
+            nb = int(np.ceil(T / block))
+            starts = RNG.integers(0, T - block, nb)
+            idx = (starts[:, None] + np.arange(block)).ravel()[:T]
+            b = x[idx]
+            ts.append(b.mean() / (b.std(ddof=1) / np.sqrt(T)))
+        max_t[i] = max(ts)
+    for r in results:
+        t = r.get("t_nw_postpub")
+        r["reality_check_p"] = (round(float((max_t >= t).mean()), 4)
+                                if t is not None else None)
+    return results
+
+
 def main():
     strategies = build_strategies()
     n_trials = len(strategies)
     results = [evaluate(n, s, py, c, n_trials) for n, s, py, c in strategies]
+    results = reality_check(strategies, results)
 
     # Benjamini-Hochberg ueber Post-Pub-p-Werte (einseitig, NW)
     ps = [(i, r["p_nw_postpub"]) for i, r in enumerate(results)

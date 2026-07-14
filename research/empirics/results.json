@@ -42,6 +42,7 @@
    0.18,
    0.03
   ],
+  "reality_check_p": 0.773,
   "bh_fdr10_bestanden": false
  },
  {
@@ -87,6 +88,7 @@
    -0.45,
    -1.33
   ],
+  "reality_check_p": 0.9895,
   "bh_fdr10_bestanden": false
  },
  {
@@ -131,6 +133,7 @@
    0.08,
    -0.05
   ],
+  "reality_check_p": 0.9955,
   "bh_fdr10_bestanden": false
  },
  {
@@ -176,6 +179,7 @@
    0.12,
    0.07
   ],
+  "reality_check_p": 0.998,
   "bh_fdr10_bestanden": false
  },
  {
@@ -221,6 +225,7 @@
    -0.03,
    -0.09
   ],
+  "reality_check_p": 1.0,
   "bh_fdr10_bestanden": false
  },
  {
@@ -262,6 +267,7 @@
    0.21,
    0.13
   ],
+  "reality_check_p": 0.991,
   "bh_fdr10_bestanden": false
  },
  {
@@ -303,6 +309,7 @@
    -0.1,
    -0.17
   ],
+  "reality_check_p": 1.0,
   "bh_fdr10_bestanden": false
  },
  {
@@ -344,6 +351,7 @@
    -0.11,
    -0.19
   ],
+  "reality_check_p": 1.0,
   "bh_fdr10_bestanden": false
  },
  {
@@ -385,6 +393,7 @@
    -0.57,
    -0.64
   ],
+  "reality_check_p": 1.0,
   "bh_fdr10_bestanden": false
  },
  {
@@ -426,6 +435,7 @@
    -0.11,
    -0.17
   ],
+  "reality_check_p": 1.0,
   "bh_fdr10_bestanden": false
  },
  {
@@ -467,6 +477,7 @@
    0.17,
    0.07
   ],
+  "reality_check_p": 0.942,
   "bh_fdr10_bestanden": false
  },
  {
@@ -512,6 +523,7 @@
    0.45,
    0.36
   ],
+  "reality_check_p": 0.057,
   "bh_fdr10_bestanden": true
  },
  {
@@ -557,6 +569,7 @@
    0.24,
    0.16
   ],
+  "reality_check_p": 0.54,
   "bh_fdr10_bestanden": true
  },
  {
@@ -602,6 +615,7 @@
    0.57,
    0.55
   ],
+  "reality_check_p": 0.0745,
   "bh_fdr10_bestanden": true
  },
  {
@@ -647,6 +661,7 @@
    0.1,
    0.08
   ],
+  "reality_check_p": 1.0,
   "bh_fdr10_bestanden": false
  },
  {
@@ -692,6 +707,7 @@
    0.29,
    0.1
   ],
+  "reality_check_p": 0.115,
   "bh_fdr10_bestanden": true
  },
  {
@@ -730,6 +746,7 @@
    0.39,
    -0.37
   ],
+  "reality_check_p": 0.013,
   "bh_fdr10_bestanden": true
  },
  {
@@ -768,6 +785,7 @@
    0.13,
    -0.53
   ],
+  "reality_check_p": 0.047,
   "bh_fdr10_bestanden": true
  },
  {
@@ -806,6 +824,7 @@
    -0.49,
    -1.46
   ],
+  "reality_check_p": 0.9975,
   "bh_fdr10_bestanden": false
  },
  {
@@ -844,6 +863,7 @@
    0.25,
    -0.0
   ],
+  "reality_check_p": 0.511,
   "bh_fdr10_bestanden": true
  }
 ]
