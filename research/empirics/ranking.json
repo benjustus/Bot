@@ -280,6 +280,26 @@
   "mandats_score": 2.7
  },
  {
+  "agent": 22,
+  "klasse": "Rohstoffe & Futures",
+  "strategie": "Commodity Basis / Term-Structure Carry (Backwardation-minus-Contango)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.4,
+  "netto_sharpe": "0.15-0.35",
+  "kernrisiko": "Financialization + Crowding erodieren die Prämie strukturell; Tail-Risiko in Storage-/Lieferkrisen (WTI April 2020: -37,63 USD/Barrel); ökonomisch eher rationale Versicherungsprämie als Mispricing, schrumpft mit zuströmendem Risikokapital.",
+  "testbar": "ja",
+  "datenquelle": "CFTC Commitments of Traders (frei, seit 1986); AQR 'Value and Momentum Everywhere' Commodity-Value-Faktor (frei, monatlich); vollständige Terminkurve (F1 vs F2..Fn) nur über kostenpflichtige Anbieter (Bloomberg/CSI/Norgate/Quandl-CHRIS-Premium).",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 4,
+   "kapazitaet": 3,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 2.7
+ },
+ {
   "agent": 7,
   "klasse": "Secondary Offerings / Net Share Issuance",
   "strategie": "Composite Equity Issuance (CEI) – Intangible-Return-Signal",
@@ -336,6 +356,26 @@
    "handelbarkeit": 4,
    "kapazitaet": 4,
    "kostenrobustheit": 4
+  },
+  "mandats_score": 2.6
+ },
+ {
+  "agent": 27,
+  "klasse": "ADRs & Cross-Listings",
+  "strategie": "Preisparitäts-Arbitrage konvertierbarer ADRs/Cross-Listings (Law-of-One-Price-Deviations)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.6,
+  "netto_sharpe": "~0.0 für Fonds auf Tages-/Stundenfrequenz; nur für Colocation-HFT-Desks >0, aber irrelevant für systematisches Mandat",
+  "kernrisiko": "Ineffizienz ist real, aber bereits durch HFT-Arbitrage-Desks auf Basispunkt-Niveau mit ~12 Minuten Halbwertszeit wegarbitriert; Latenzwettbewerb, den ein Multi-Tage-Fonds nicht gewinnen kann",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 1
   },
   "mandats_score": 2.6
  },
@@ -420,6 +460,26 @@
   "mandats_score": 2.4
  },
  {
+  "agent": 22,
+  "klasse": "Rohstoffe & Futures",
+  "strategie": "Cross-Sectional Commodity Momentum",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "0.05-0.25",
+  "kernrisiko": "Dokumentierter Crowding-Effekt (~8% p.a. Renditeeinbuße pro Std.-Abw. Crowding-Anstieg) frisst Bruttoprämie von 9-15% p.a. weitgehend auf; hoher Turnover, Momentum-Crash-Risiko bei abrupten Regimewechseln.",
+  "testbar": "ja",
+  "datenquelle": "Yahoo Finance/Stooq Frontmonth-Futures (CL=F, GC=F, ZC=F, HG=F, NG=F etc.); AQR 'Value and Momentum Everywhere' Commodity-Momentum-Faktor (frei, monatlich).",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 4,
+   "kapazitaet": 3,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.4
+ },
+ {
   "agent": 15,
   "klasse": "Mean Reversion / Short-Term Reversal",
   "strategie": "Pairs Trading (Distance-Methode, Gatev/Goetzmann/Rouwenhorst)",
@@ -456,6 +516,26 @@
    "handelbarkeit": 4,
    "kapazitaet": 4,
    "kostenrobustheit": 3
+  },
+  "mandats_score": 2.3
+ },
+ {
+  "agent": 27,
+  "klasse": "ADRs & Cross-Listings",
+  "strategie": "Dual-Listed-Company-Arbitrage (Siamese Twins, z.B. Royal Dutch/Shell-Typ)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.55,
+  "netto_sharpe": "historisch 0.1-0.3 (de Jong et al. 2009), aber mit extremer Linksschiefe/Tail-Risiko; aktuell nicht replizierbar mangels Anlageuniversum",
+  "kernrisiko": "Divergenz kann >8 Jahre gegen die Position laufen (LTCM 1997-2005, Verlust von über der Hälfte der ~$286 Mio. Equity-Pairs-Verluste allein im Royal-Dutch/Shell-Trade); Anlageuniversum ist durch freiwillige Unifikationen (Shell 2005, RELX 2018, Mondi 2019, Unilever 2020, Reckitt 2021, BHP 2022, Carnival 2026) auf praktisch ein Restrisiko (Rio Tinto) geschrumpft",
+  "testbar": "ja",
+  "datenquelle": "Yahoo Finance historische Ticker-Paare (RDSA.L/RDSB.L vor 2005, UN/UL vor 2020, BHP/BLT vor 2022) – nur noch historische Fallstudien, keine laufend handelbare Strategie",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 2
   },
   "mandats_score": 2.3
  },
@@ -600,6 +680,46 @@
   "mandats_score": 2.1
  },
  {
+  "agent": 25,
+  "klasse": "Small Caps & Micro Caps",
+  "strategie": "Size + Quality/Junk-Kontrolle (Asness, Frazzini, Israel, Moskowitz, Pedersen 2018 - 'Size Matters, If You Control Your Junk')",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.4,
+  "netto_sharpe": "0.15-0.30 brutto (kleine, institutionell nicht relevante Kapazitaet); netto nach Leihgebuehren/Spreads auf der Short-Junk-Seite realistisch 0.0-0.15 bei jeder nennenswerten Kapitalgroesse",
+  "kernrisiko": "Short-Bein (junge/junky Microcaps) ist teuer und schwer leihbar; Crowded-Short-Squeeze-Risiko (Meme-Stock-Analogon Jan. 2021); QMJ-Faktor selbst in tiefster Drawdown-Phase seit 20 Jahren (2021-2025); Autoren sind AQR-Mitarbeiter mit kommerziellem QMJ/SMB-Produktinteresse (Promotion-Bias); Konstrukt 'Quality' hat viele Freiheitsgrade (Profitabilitaet/Safety/Payout/Growth-Definitionen), Data-Mining-Risiko",
+  "testbar": "ja",
+  "datenquelle": "AQR 'Quality Minus Junk: Factors, Monthly' Datensatz + Ken French Size/Profitability doppelt sortierte Portfolios (Proxy)",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.1
+ },
+ {
+  "agent": 27,
+  "klasse": "ADRs & Cross-Listings",
+  "strategie": "Nicht-konvertierbare Cross-Listing-Prämien (China A-H-Premium, VIE-basierter US-ADR-Diskont) inkl. Zeitzonen-Friktion",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "~0.0 bis leicht negativ nach Tail-Risiko-Adjustierung (Delisting/Kapitalkontrollen); für Fondsmandat nicht umsetzbar",
+  "kernrisiko": "Kein legaler Arbitrage-Mechanismus für die meisten Marktteilnehmer (Kapitalverkehrskontrollen, Quoten); VIE-Rechtsstrukturrisiko und Delisting-Risiko (HFCAA) können Totalverlust statt Drawdown bedeuten",
+  "testbar": "ja",
+  "datenquelle": "Hang Seng Stock Connect China AH Premium Index (Bloomberg/Investing.com Ticker, z.B. 'AHPI'); Yahoo-Finance A/H-Ticker-Paare (z.B. 601398.SS vs. 1398.HK)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 4,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 1,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.1
+ },
+ {
   "agent": 4,
   "klasse": "Spin-offs & Abspaltungen",
   "strategie": "Post-Spin-off Kursdrift der abgespaltenen Tochtergesellschaft (Spinoff Subsidiary Drift)",
@@ -720,6 +840,46 @@
   "mandats_score": 2.0
  },
  {
+  "agent": 22,
+  "klasse": "Rohstoffe & Futures",
+  "strategie": "Hedging-Pressure-Faktor (Commercial Hedging Pressure, Basu & Miffre 2013)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.25,
+  "netto_sharpe": "0.0-0.15",
+  "kernrisiko": "Starke Multikollinearität mit dem Basis-Faktor (kein robuster eigenständiger Signalgehalt); CFTC-Reklassifizierung 2009 (Legacy zu Disaggregated COT) bricht Zeitreihenkontinuität; 'Commercial'-Kategorie enthält zunehmend Swap-Dealer/Index-Investoren statt echter Produzenten-Hedger, was die Kern-Theorie verwässert.",
+  "testbar": "ja",
+  "datenquelle": "CFTC Commitments of Traders (Legacy seit 1986, Disaggregated seit 2006, frei, wöchentlich)",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 3,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 2.0
+ },
+ {
+  "agent": 24,
+  "klasse": "Overnight-Effekt",
+  "strategie": "Cross-sektionaler Overnight/Intraday Tug-of-War (Momentum-Zerlegung, Lou/Polk/Skouras 2019; Akbas/Boehmer/Jiang/Koch 2022)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0.1-0.3 brutto vor Kosten; nahe 0 fuer eigenstaendige Standalone-Strategie netto",
+  "kernrisiko": "Kosten der Cross-Sektions-Strategie werden in den Originalstudien nicht quantifiziert; Signal ueberlappt stark mit bekanntem Momentum-/Reversal-Faktor (fragliche inkrementelle Kapazitaet); Post-2019-Evidenz stammt aus verwandten, nicht identischen Replikationsstudien",
+  "testbar": "ja",
+  "datenquelle": "Taegliche OHLC-Kurse breiter Aktienuniversen (Yahoo Finance/Stooq) zur groben Open/Close-Zerlegung; fuer saubere Replikation waeren CRSP/TAQ-Intraday-Daten noetig; kein Ken-French-Datensatz",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.0
+ },
+ {
   "agent": 3,
   "klasse": "Insiderkäufe",
   "strategie": "Cluster-Käufe mehrerer Insider/Executives (koordiniertes Kaufsignal)",
@@ -795,6 +955,46 @@
    "regimestabilitaet": 1,
    "handelbarkeit": 3,
    "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.9
+ },
+ {
+  "agent": 25,
+  "klasse": "Small Caps & Micro Caps",
+  "strategie": "Mikrocap-Illiquiditaetspraemie / praktische Umsetzung mit Geduld+Qualitaet+Liquiditaetsfilter (DFA/Avantis-Stil)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0.10-0.20, primaer Exekutions-/Geduld-Alpha statt reiner systematischer Faktor-Praemie",
+  "kernrisiko": "Akademische Illiquiditaetspraemie seit Mitte-1980er statistisch nicht mehr von Null unterscheidbar (Ben-Rephael/Kadan/Wohl 2015); beobachtete Outperformance einzelner Live-Fonds (DFA) wahrscheinlich Exekutions-/Zugangs-Alpha (Nischen-Infrastruktur, Geduld, Blockhandel-Netzwerk), schwer replizierbar; Gesamtkapazitaet der Anlageklasse extrem klein (aggregiertes taegliches Dollarvolumen aller US-Microcaps in der Groessenordnung von wenigen hundert Mio. USD)",
+  "testbar": "ja",
+  "datenquelle": "Ken French Size-Dezile (Lo10/'Micro') als Proxy; echte Amihud-ILLIQ-Reihen erfordern CRSP (kostenpflichtig); ersatzweise oeffentliche Kursreihen DFSCX/IWC/AVUV",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.9
+ },
+ {
+  "agent": 26,
+  "klasse": "Biotech-Katalysatoren",
+  "strategie": "Pre-Event-Run-up / informationsgetriebene Vorpositionierung vor PDUFA- und Advisory-Committee-Terminen",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "0.0-0.2 fuer Outsider-Replikation nach Kosten; deutlich hoeher nur fuer die informierten Erstpositionierer selbst",
+  "kernrisiko": "Wer dem dokumentierten 'informed flow' hinterherhandelt, wird strukturell zur Gegenpartei der eigentlich informierten Trader zum ungünstigsten Zeitpunkt (adverse selection) und traegt gleichzeitig das volle binaere Gap-Risiko (-80%/+300%).",
+  "testbar": "ja",
+  "datenquelle": "PDUFA-/AdCom-Kalender: FDA.gov 'Drugs@FDA' (frei); Kurse: Yahoo Finance/Stooq (frei). Options-IV/-Volumen-Signale (Kern der Originalstudien) NICHT frei verfuegbar (OptionMetrics/CBOE LiveVol kostenpflichtig).",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
    "kostenrobustheit": 2
   },
   "mandats_score": 1.9
@@ -938,6 +1138,46 @@
    "kostenrobustheit": 2
   },
   "mandats_score": 1.7
+ },
+ {
+  "agent": 25,
+  "klasse": "Small Caps & Micro Caps",
+  "strategie": "Rohe Size-Praemie (SMB unkonditioniert, Small-minus-Big long/short oder long-only Small-Cap-Tilt)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.08,
+  "netto_sharpe": "0.0-0.05 (statistisch nicht von Null unterscheidbar seit 1982)",
+  "kernrisiko": "Kein dokumentierter Netto-Alpha nach 1981; Praemie ist Artefakt aus Delisting-/Survivorship-Bias und Januar-Saisonalitaet; prozyklisches Tail-Risiko (Rezession, Zinsanstieg, Liquiditaetskrisen); letztes Jahrzehnt (2010-2024) klar negativ (-3.6%/Jahr ggue. Large Caps)",
+  "testbar": "ja",
+  "datenquelle": "Ken French Data Library: 'Portfolios Formed on Size' (SMB-Faktor, Size-Dezile Lo10/Hi10)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 3,
+   "kapazitaet": 4,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.66
+ },
+ {
+  "agent": 24,
+  "klasse": "Overnight-Effekt",
+  "strategie": "Naiver Close-to-Open Overnight-Drift (Index/Futures/ETF, Cliff/Cooper/Gulen 2008; Boyarchenko/Larsen/Whelan 2020)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.12,
+  "netto_sharpe": "~0.0, netto seit 2021 eher leicht negativ",
+  "kernrisiko": "Effekt ist gemäss Post-Publication-Studie der Originalautoren (NY Fed, Juli 2026) seit 2021 auf effektiv null kollabiert; selbst brutto reichten historische ~3.6-3.7%/Jahr nicht, um realistische Handelskosten von ~5%/Jahr (252 Round-Trips) zu decken; unkompensiertes Gap-/Tail-Risiko in Krisen (Marz 2020, Circuit Breaker)",
+  "testbar": "ja",
+  "datenquelle": "SPY/^GSPC/ES-Futures OHLC via Yahoo Finance (Open vs. Vortages-Close); kein Ken-French-Datensatz verfuegbar (Ken French fuehrt keine Overnight/Intraday-Zerlegung)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 2,
+   "kapazitaet": 4,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.64
  },
  {
   "agent": 21,
@@ -1140,6 +1380,26 @@
   "mandats_score": 1.4
  },
  {
+  "agent": 26,
+  "klasse": "Biotech-Katalysatoren",
+  "strategie": "Post-Event-Drift nach FDA-Entscheid ('Sell-the-News' vs. Momentum-Fortsetzung)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "~0.0, kein robuster Nachweis eines Vorzeichens",
+  "kernrisiko": "Literatur und Praktiker-Quellen widersprechen sich ueber das Vorzeichen des Effekts (Drift vs. Sell-the-News) fuer dieselbe Ereignisklasse - ein klassisches Warnsignal fuer Post-hoc-Narrativ statt robustem Effekt.",
+  "testbar": "ja",
+  "datenquelle": "FDA.gov PDUFA-Kalender (frei) + Yahoo Finance/Stooq Kurshistorien (frei)",
+  "scores": {
+   "reproduzierbarkeit": 1,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.4
+ },
+ {
   "agent": 1,
   "klasse": "Earnings Drift (PEAD)",
   "strategie": "Klassische SUE-Preis-Drift (Bernard & Thomas 1989, decile-basiert)",
@@ -1258,6 +1518,26 @@
    "kostenrobustheit": 1
   },
   "mandats_score": 1.2
+ },
+ {
+  "agent": 26,
+  "klasse": "Biotech-Katalysatoren",
+  "strategie": "Optionspraemien-Verkauf / 'IV-Crush'-Harvesting um binaere FDA-Events (Short Straddle/Strangle)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "unklar/vermutlich <=0 nach Tail-Risiko-Adjustierung (Brutto-Trackrekords ohne Tail-Jahre sind survivorship-verzerrt)",
+  "kernrisiko": "Katastrophales, geclustertes Tail-Risiko ('picking up nickels in front of a steamroller'); ein einzelnes -85%- oder +300%-Gap-Event kann Jahre an aufgelaufenen Praemieneinnahmen ausloeschen. Keine belastbare akademische Quantifizierung gefunden - Evidenzbasis ist Trading-Blog-Folklore.",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 1,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.0
  },
  {
   "agent": 18,
