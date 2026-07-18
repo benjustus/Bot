@@ -40,6 +40,26 @@
   "mandats_score": 3.4
  },
  {
+  "agent": 16,
+  "klasse": "Zeitreihen-Momentum / Trendfolge",
+  "strategie": "Diversifizierte Multi-Horizont-Trendfolge (CTA-Stil; Hurst/Ooi/Pedersen 'Century of Evidence' + Live-Indizes SG Trend/BTOP50)",
+  "urteil": "CANDIDATE",
+  "p_echte_ineffizienz": 0.5,
+  "netto_sharpe": "0.2-0.4",
+  "kernrisiko": "Strukturelle Renditekompression seit ca. 2010: Netto-Performance hängt fast vollständig von wenigen Krisenjahren ab (2022 trägt den Großteil der kumulierten 2020-2025-Rendite); 2025 erneut zweistellig negativ (SG Trend YTD Aug. 2025: -9.3%). Charakter zunehmend 'Krisen-Versicherung' statt 'Alpha'; langes Flat-/Drawdown-Regime = reales Karriere-/Redemption-Risiko für Investoren und Manager.",
+  "testbar": "ja",
+  "datenquelle": "SG Trend Index (täglich, öffentlich, wholesale.banking.societegenerale.com); BTOP50 (barclayhedge.com); ETF-Proxies DBMF/KMLM/CTA (Yahoo Finance)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 5,
+   "kapazitaet": 5,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 3.3
+ },
+ {
   "agent": 11,
   "klasse": "Faktorprämien (Value/Profitability/Investment/Quality)",
   "strategie": "Profitabilitäts-/Qualitätsprämie (Gross Profitability RMW / QMJ)",
@@ -135,6 +155,26 @@
    "regimestabilitaet": 3,
    "handelbarkeit": 2,
    "kapazitaet": 2,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 2.8
+ },
+ {
+  "agent": 20,
+  "klasse": "Closed-End-Fund-Discounts",
+  "strategie": "IPO-Premium-Zerfall (Vermeidung/Leerverkauf von CEF-Neuemissionen)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.55,
+  "netto_sharpe": "nicht anwendbar als Alpha-Strategie (kein Leerverkauf am IPO-Tag verfügbar); als reine Vermeidungsregel kein Zusatzertrag ggü. Cash, nur Verlustvermeidung ggü. Kauf zur Erstnotiz",
+  "kernrisiko": "Kein handelbarer Hedge: Aktienleihe für Shorts am IPO-Tag praktisch nicht verfügbar (dünner Float, keine etablierte Handelshistorie); CEF-IPO-Volumen seit 2008 strukturell eingebrochen, Anlageuniversum in manchen Jahren nahe null",
+  "testbar": "ja",
+  "datenquelle": "SEC EDGAR (N-2-Registrierungen/Prospekte) + Yahoo Finance Kurshistorie ab Erstnotiz",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 4,
+   "handelbarkeit": 1,
+   "kapazitaet": 1,
    "kostenrobustheit": 3
   },
   "mandats_score": 2.8
@@ -280,6 +320,26 @@
   "mandats_score": 2.6
  },
  {
+  "agent": 18,
+  "klasse": "Short Interest",
+  "strategie": "Aggregiertes Short Interest als Markttiming-Signal (Rapach, Ringgenberg & Zhou 2016, JFE)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "0.1-0.3",
+  "kernrisiko": "Kernresultat ggf. stark durch Kalenderjahr 2008 getrieben; kein verifizierter Post-2016-Out-of-Sample-Replikationstest mit weiterhin starker Performance gefunden; Timing-Signal mit nur ~12 Monatsbeobachtungen p.a. -> geringe statistische Power pro Dekade",
+  "testbar": "ja",
+  "datenquelle": "FINRA/NYSE aggregierte Short-Interest-Summen (frei) + Ken-French Mkt-RF / CRSP-Value-Weighted-Index",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 4,
+   "kapazitaet": 4,
+   "kostenrobustheit": 4
+  },
+  "mandats_score": 2.6
+ },
+ {
   "agent": 1,
   "klasse": "Earnings Drift (PEAD)",
   "strategie": "Preis- + Earnings-Momentum kombiniert (Chan/Jegadeesh/Lakonishok 1996)",
@@ -340,6 +400,26 @@
   "mandats_score": 2.4
  },
  {
+  "agent": 16,
+  "klasse": "Zeitreihen-Momentum / Trendfolge",
+  "strategie": "Klassisches 12-Monats-TSMOM (Single-Signal, Moskowitz/Ooi/Pedersen 2012)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0.1-0.3",
+  "kernrisiko": "Huang/Li/Wang/Zhou (2020, JFE): gepoolte Panel-Regression unterstellt identisches Alpha über alle 58 Instrumente und überschätzt dadurch Signifikanz massiv; asset-by-asset-Tests zeigen kaum TSM-Evidenz. Profitabilität evtl. nur Reflex der positiven historischen Durchschnittsrendite langer Bullenmärkte (Anleihen 1985-2020, Aktien) statt echter Trendfolge.",
+  "testbar": "ja",
+  "datenquelle": "Kontinuierliche Futures-Kurse (Stooq, Yahoo Finance); AQR 'Time Series Momentum Original Paper Data' (öffentlich, aqr.com/Insights/Datasets)",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 4,
+   "kapazitaet": 4,
+   "kostenrobustheit": 3
+  },
+  "mandats_score": 2.4
+ },
+ {
   "agent": 15,
   "klasse": "Mean Reversion / Short-Term Reversal",
   "strategie": "Pairs Trading (Distance-Methode, Gatev/Goetzmann/Rouwenhorst)",
@@ -356,6 +436,26 @@
    "handelbarkeit": 3,
    "kapazitaet": 2,
    "kostenrobustheit": 2
+  },
+  "mandats_score": 2.3
+ },
+ {
+  "agent": 23,
+  "klasse": "Makroregime & Ankündigungseffekte",
+  "strategie": "Makro-Ankündigungsprämie (Savor & Wilson 2013: CPI-/NFP-/FOMC-Tage)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.25,
+  "netto_sharpe": "0.1-0.3 brutto (Long-Beta an Ankündigungstagen); nach Marktbeta-Adjustierung vermutlich nahe 0",
+  "kernrisiko": "Kaum unterscheidbar von reiner, im Voraus bekannter Markt-Beta-Exposure an Tagen mit hohem systematischem Risiko; aktuelle Kritik (Management Science 2024) zeigt, dass die bedingte Volatilität an Ankündigungstagen entgegen der Risikoprämien-Theorie kaum fällt",
+  "testbar": "ja",
+  "datenquelle": "CRSP/^GSPC Tagesrenditen + Fama-French Mkt-RF (Ken French Data Library) + BLS/BEA/FOMC-Terminkalender",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 4,
+   "kapazitaet": 4,
+   "kostenrobustheit": 3
   },
   "mandats_score": 2.3
  },
@@ -420,6 +520,86 @@
   "mandats_score": 2.2
  },
  {
+  "agent": 17,
+  "klasse": "Optionsanomalien (VRP/VIX-Carry/Put-Writing)",
+  "strategie": "Equity Variance Risk Premium (Short-Vol via Delta-Hedged Optionen / Variance Swaps, Carr & Wu 2009 / Bakshi & Kapadia 2003)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0.2-0.5 (long-run, vor Tail-Event), episodisch stark negativ",
+  "kernrisiko": "Linksschiefes Tail-Risiko: Verlust an einem einzigen Tag (Feb 2018, Mrz 2020) kann 2-5 Jahre kumulierter Prämie auslöschen; Peso-Problem in Backtests",
+  "testbar": "ja",
+  "datenquelle": "CBOE PUT/BXM/BXMD-Indizes (öffentlich), CBOE VIX-Index-Historie, Yahoo Finance ^VIX/^GSPC, OptionMetrics falls verfügbar (nicht frei)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 3,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.2
+ },
+ {
+  "agent": 17,
+  "klasse": "Optionsanomalien (VRP/VIX-Carry/Put-Writing)",
+  "strategie": "Dispersion Trading / Correlation Risk Premium (short Index-Implied-Correlation vs. long Einzelaktien-Vol)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.4,
+  "netto_sharpe": "0.3-0.6 brutto, nach breiten Bid/Ask-Spreads und Rebalancing-Kosten deutlich niedriger, evtl. <0.2 netto",
+  "kernrisiko": "Korrelations-Spikes in Makro-Schocks (2008, 2020, 2022); Deng (2008) zeigt Sharpe-Kollaps von 1.2 (1996-2000) auf -0.17 (post-2000) - starkes Post-Publication-Decay-Signal",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.1
+ },
+ {
+  "agent": 19,
+  "klasse": "ETF-Flows",
+  "strategie": "Monatsende-Rebalancing-Flows / Turn-of-the-Month (Multi-Asset- und Indexfonds)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.25,
+  "netto_sharpe": "0.1-0.3 brutto, ~0.0-0.15 netto nach Transaktionskosten und Crowding",
+  "kernrisiko": "Kausalmechanismus (Flow-getrieben) durch eigene Originalstudien widerlegt bzw. nicht durch Fondsflows erklaerbar; Alternativerklaerung (Risk-Deferral) ist keine reine ETF-Flow-Anomalie und daher ausserhalb des engen Mandats",
+  "testbar": "ja",
+  "datenquelle": "Ken French Daily/Monthly Factors (Mkt-RF) fuer Turn-of-Month Replikation",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 3,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.1
+ },
+ {
+  "agent": 20,
+  "klasse": "Closed-End-Fund-Discounts",
+  "strategie": "Systematische Discount-Mean-Reversion (Kauf tiefster Discounts / Discount-Spread-Strategie)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0.1-0.3",
+  "kernrisiko": "Diskont-Ausweitung korreliert mit Marktstress (März 2020: Aktien-CEF-Discount im Schnitt auf -11%); ein Großteil des beobachtbaren Discounts ist rationale Fee-Kapitalisierung (Ross 2002) und Steuer-/Illiquiditätskompensation, keine Fehlbewertung; Bruttoalpha wird von Spreads/Fees weitgehend aufgezehrt",
+  "testbar": "ja",
+  "datenquelle": "CEFConnect.com Discount/Premium-Historie (kostenlos, täglich) + Yahoo Finance Kurs-/NAV-Ticker; kein Ken-French-Faktor vorhanden",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.1
+ },
+ {
   "agent": 4,
   "klasse": "Spin-offs & Abspaltungen",
   "strategie": "Post-Spin-off Kursdrift der abgespaltenen Tochtergesellschaft (Spinoff Subsidiary Drift)",
@@ -434,6 +614,26 @@
    "signifikanz_nach_mtk": 2,
    "regimestabilitaet": 2,
    "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.0
+ },
+ {
+  "agent": 5,
+  "klasse": "Index-Aufnahmen & -Ausschlüsse",
+  "strategie": "Russell-Rekonstitution (Anticipatory Trading / Reconstitution-Arbitrage, Additions & Deletions)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.35,
+  "netto_sharpe": "0.1-0.3 brutto geschätzt; nach Crowding/Kosten/Wettbewerb realistisch 0.0-0.15, hohe Schätzunsicherheit (nur 1-2 Events p.a.)",
+  "kernrisiko": "Extrem niedrige Eventfrequenz (Konzentrationsrisiko, kein Diversifikationseffekt innerhalb eines Jahres), starkes Crowding durch dedizierte Index-Arb-/Programmhandelsdesks, aktive Methodik-Änderungen von FTSE Russell (Banding, Diskussion Semi-Annual-Rekonstitution) als laufendes Strukturrisiko.",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
    "kapazitaet": 2,
    "kostenrobustheit": 2
   },
@@ -455,6 +655,66 @@
    "regimestabilitaet": 2,
    "handelbarkeit": 3,
    "kapazitaet": 3,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.0
+ },
+ {
+  "agent": 18,
+  "klasse": "Short Interest",
+  "strategie": "Cross-sektionale Short-Interest-Anomalie (Miller 1977 / Asquith-Pathak-Ritter 2005 / Boehmer-Jones-Zhang 2008), kostenadjustiert",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.3,
+  "netto_sharpe": "0.0-0.2",
+  "kernrisiko": "Borrow-Fees und Squeeze-Tail-Risiko konzentrieren sich exakt in den Titeln, in denen das rohe Signal am stärksten ist (Drechsler & Drechsler 2014); Value-Weighted-Version ist fast insignifikant; unbegrenztes Verlustpotenzial bei Squeeze-Events (GameStop Jan. 2021)",
+  "testbar": "ja",
+  "datenquelle": "FINRA/NYSE/Nasdaq Bi-Weekly Short Interest Reports (frei) + CRSP/Yahoo Finance/Stooq Kursdaten; Borrow-Fees/Utilization NICHT frei verfügbar (IHS Markit Securities Finance, S3 Partners, Ortex sind kostenpflichtig)",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.0
+ },
+ {
+  "agent": 20,
+  "klasse": "Closed-End-Fund-Discounts",
+  "strategie": "Aktivisten-getriebene Open-Ending-Arbitrage (Saba-Capital-Stil / 13D-Kampagnen)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.4,
+  "netto_sharpe": "0.1-0.3 institutionell (nur mit Aktivisten-Zugang); strukturell rückläufig seit Supreme-Court-Urteil 06/2026",
+  "kernrisiko": "Supreme Court, FS Credit Opportunities Corp. v. Saba Capital Master Fund (11.6.2026): kein implied private right of action unter Sec. 47(b) ICA -> zentrales Klageinstrument der Aktivisten entfällt, Board-Entrenchment/Control-Share-Bylaws werden gestärkt; Strategie hängt an 2-3 dominanten Akteuren (Saba, Bulldog, Karpus) = Klumpenrisiko der gesamten Anomalieklasse",
+  "testbar": "ja",
+  "datenquelle": "SEC EDGAR (Schedule 13D/13F, DFAN14A) + CEFConnect Discount-Daten",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 3,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 2.0
+ },
+ {
+  "agent": 21,
+  "klasse": "Merger Arbitrage & Corporate Actions",
+  "strategie": "Cash-Merger-Arbitrage & Fixed-Price Tender Offers (Deal-Spread-Capture)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.25,
+  "netto_sharpe": "0.15-0.35 (systematisch, vor Fremdkapitalkostenschwankung)",
+  "kernrisiko": "Deal-Break-Klumpenrisiko korreliert mit Kredit-/Liquiditätskrisen (2008, 2020) und mit dem politischen Antitrust-Regime (2021-2024 vs. 2025-2026) - nicht diversifizierbares Makro-Tail-Risiko trotz Einzeldeal-Diversifikation",
+  "testbar": "ja",
+  "datenquelle": "SEC EDGAR (8-K/DEFM14A-Ankündigungen, HSR-Fristen) + Yahoo Finance Kurse; kein Ken-French-Datensatz; Deal-Datenbanken (SDC Platinum/Refinitiv) kostenpflichtig",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
    "kostenrobustheit": 2
   },
   "mandats_score": 2.0
@@ -516,6 +776,26 @@
    "handelbarkeit": 3,
    "kapazitaet": 2,
    "kostenrobustheit": 3
+  },
+  "mandats_score": 1.9
+ },
+ {
+  "agent": 17,
+  "klasse": "Optionsanomalien (VRP/VIX-Carry/Put-Writing)",
+  "strategie": "VIX-Terminstruktur-Carry (Contango-Roll, short VIX-Futures/kurzlaufende ETPs)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.25,
+  "netto_sharpe": "0.3-0.6 vor Crash-Perioden, langfristig durch Crash-Cluster auf ~0.1-0.3 gedrückt",
+  "kernrisiko": "Backwardation-Spikes (Vol-of-Vol-Explosion): XIV verlor -96% an einem Tag (5. Feb 2018), Totalverlust-Risiko bei gehebelten/inversen ETPs",
+  "testbar": "ja",
+  "datenquelle": "CBOE VIX Futures/Term-Structure-Historie, CFE-Settlementdaten, Yahoo Finance (VXX, SVXY) Kurshistorie",
+  "scores": {
+   "reproduzierbarkeit": 4,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
   },
   "mandats_score": 1.9
  },
@@ -600,6 +880,26 @@
   "mandats_score": 1.8
  },
  {
+  "agent": 19,
+  "klasse": "ETF-Flows",
+  "strategie": "Leveraged-ETF-Rebalancing Front-Running (End-of-Day)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.25,
+  "netto_sharpe": "0.0-0.3 (regimeabhaengig, meist ~0 im Normalregime, temporaer hoeher in Krisen-Clustern)",
+  "kernrisiko": "Effekt existiert fast ausschliesslich in kurzen Stress-Clustern (Okt/Nov 2008); im Normalregime statistisch/oekonomisch insignifikant laut 2024-Survey; Crowding durch bekannte Deterministik seit >15 Jahren",
+  "testbar": "ja",
+  "datenquelle": "Yahoo/Stooq Intraday-Kurse SSO/SDS/TQQQ/SQQQ + SPX Tagesdaten; kein Ken-French-Datensatz einschlaegig",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 1,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.8
+ },
+ {
   "agent": "08",
   "klasse": "IPOs",
   "strategie": "Langfristige IPO-Underperformance / 'New Issues Puzzle'",
@@ -640,6 +940,66 @@
   "mandats_score": 1.7
  },
  {
+  "agent": 21,
+  "klasse": "Merger Arbitrage & Corporate Actions",
+  "strategie": "Stock-for-Stock Merger-Arbitrage (Exchange-Ratio-Arbitrage mit Akquirer-Short)",
+  "urteil": "WEAK",
+  "p_echte_ineffizienz": 0.2,
+  "netto_sharpe": "0.05-0.25",
+  "kernrisiko": "Leihkosten/Hard-to-Borrow auf Akquirer-Aktie, Recall-Risiko in Proxy-Saison, Repricing bei Exchange-Ratio-Änderungen; Short-Hedge selbst unter Stress (Squeeze) gefährdet",
+  "testbar": "ja",
+  "datenquelle": "SEC EDGAR (S-4/DEFM14A fuer Exchange Ratios) + Yahoo Finance; Borrow-Fee-Daten nicht frei verfuegbar (groesste Datenluecke)",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 2,
+   "kapazitaet": 2,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.6
+ },
+ {
+  "agent": 23,
+  "klasse": "Makroregime & Ankündigungseffekte",
+  "strategie": "Pre-FOMC Announcement Drift (Lucca & Moench 2015)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "0.0-0.1 (post-2015 statistisch nicht von Null verschieden)",
+  "kernrisiko": "Effekt an strukturell gesunkene geldpolitische Unsicherheit (VIX-Rückgang) gebunden und seit ca. 2015 in mehreren unabhängigen Studien nicht mehr nachweisbar; Wette auf Rückkehr eines verschwundenen Musters bei fortbestehendem Tail-Risiko durch Policy-Überraschungen ohne kompensierende Prämie",
+  "testbar": "ja",
+  "datenquelle": "SPY/ES-Tagesdaten (Yahoo Finance) + FOMC-Sitzungskalender (federalreserve.gov)",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 4,
+   "kapazitaet": 3,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.6
+ },
+ {
+  "agent": 23,
+  "klasse": "Makroregime & Ankündigungseffekte",
+  "strategie": "FOMC-Zyklus-Effekt / gerade Wochen (Cieslak, Morse & Vissing-Jørgensen 2019)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.1,
+  "netto_sharpe": "ca. 0.0 nach 2015",
+  "kernrisiko": "Mechanismus (informelle Fed-Kommunikation im 2-Wochen-Rhythmus der Board-Sitzungen) an eine seither veränderte institutionelle Struktur gebunden; Replikationen für 2014-2023 finden den Effekt nicht mehr; hohe Rebalancing-Frequenz (alle 2 Wochen) erhöht die Kostenlast bei verschwindendem Signal",
+  "testbar": "ja",
+  "datenquelle": "^GSPC Tagesrenditen + FOMC-Sitzungskalender (federalreserve.gov)",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 4,
+   "kapazitaet": 4,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.6
+ },
+ {
   "agent": 2,
   "klasse": "Analystenrevisionen",
   "strategie": "Kursziel-Revisionen (Analyst Target Price Changes)",
@@ -676,6 +1036,46 @@
    "handelbarkeit": 4,
    "kapazitaet": 4,
    "kostenrobustheit": 2
+  },
+  "mandats_score": 1.5
+ },
+ {
+  "agent": 16,
+  "klasse": "Zeitreihen-Momentum / Trendfolge",
+  "strategie": "Kurzfristige / beschleunigte Trendfolge (verkürzte Lookback-Fenster, 'Speed'-Trend)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "-0.1 bis 0.1",
+  "kernrisiko": "Crowding/Noise-Chasing: der von der Branche selbst berichtete Trend zu kürzeren Lookback-Fenstern (2015-2025) fällt zeitlich mit der schwächsten CTA-Performance-Periode zusammen; kein robustes ökonomisches Fundament jenseits reiner Geschwindigkeits-Arbitrage, die gegen HFT/Market-Maker-Kapital konkurriert.",
+  "testbar": "ja",
+  "datenquelle": "Kontinuierliche Futures-Kurse (Stooq/Yahoo Finance), kurze Lookback-Fenster selbst konstruierbar; kein etablierter freier Referenzindex",
+  "scores": {
+   "reproduzierbarkeit": 2,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 4,
+   "kapazitaet": 2,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 1.5
+ },
+ {
+  "agent": 19,
+  "klasse": "ETF-Flows",
+  "strategie": "ETF-Premium/Discount NAV-Arbitrage (Nicht-AP-Perspektive)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.15,
+  "netto_sharpe": "~0.0-0.1 fuer Nicht-APs nach Kosten; AP-Segment nicht zugaenglich/nicht Teil des Mandats",
+  "kernrisiko": "Geschaeftsmodell strukturell APs/Market-Makern mit Realzeit-Creation/Redemption vorbehalten; Restopportunitaet (Petajisto) konzentriert in illiquiden/internationalen ETFs mit hohen Handelskosten, die die 7% Brutto-Abnormal-Return auffressen",
+  "testbar": "ja",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 2,
+   "regimestabilitaet": 3,
+   "handelbarkeit": 1,
+   "kapazitaet": 2,
+   "kostenrobustheit": 1
   },
   "mandats_score": 1.5
  },
@@ -720,6 +1120,26 @@
   "mandats_score": 1.4
  },
  {
+  "agent": 21,
+  "klasse": "Merger Arbitrage & Corporate Actions",
+  "strategie": "Ex-ante Deal-Risiko-Selektion / Completion-Probability-Overlay (Baker-Savasoglu-Faktor)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.1,
+  "netto_sharpe": "0.0-0.15 (inkrementell, kein eigenstaendiger Sharpe)",
+  "kernrisiko": "Kein eigenstaendiges Alpha - Signal (Deal-Groesse, Praemie, cash vs. stock, feindlich vs. freundlich) ist seit Jahrzehnten Marktstandard jedes Arb-Desks; echte Kante erfordert diskretionaere Rechts-/Regulierungseinschaetzung, nicht systematisch reproduzierbar",
+  "testbar": "nein",
+  "datenquelle": "-",
+  "scores": {
+   "reproduzierbarkeit": 3,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 2,
+   "handelbarkeit": 3,
+   "kapazitaet": 2,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.4
+ },
+ {
   "agent": 1,
   "klasse": "Earnings Drift (PEAD)",
   "strategie": "Klassische SUE-Preis-Drift (Bernard & Thomas 1989, decile-basiert)",
@@ -734,6 +1154,26 @@
    "signifikanz_nach_mtk": 1,
    "regimestabilitaet": 2,
    "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.3
+ },
+ {
+  "agent": 5,
+  "klasse": "Index-Aufnahmen & -Ausschlüsse",
+  "strategie": "S&P-500-Inklusionseffekt (Additions long)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.05,
+  "netto_sharpe": "~0.0 (seit ca. 2010 statistisch nicht von Null unterscheidbar, brutto)",
+  "kernrisiko": "Sekulärer, monoton verlaufender Decay bis zur Bedeutungslosigkeit (7,6% -> 0,8% AR); jede verbleibende Kante wird von Bank-Programmhandelsdesks in Millisekunden abgeschöpft, bevor ein Fonds mit T+1-Ausführung reagieren kann.",
+  "testbar": "ja",
+  "datenquelle": "Öffentliche S&P-500-Änderungsliste (Wikipedia 'List of S&P 500 companies'/S&P-Pressemitteilungen) + Yahoo Finance/Stooq Kursdaten",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 3,
    "kapazitaet": 1,
    "kostenrobustheit": 1
   },
@@ -780,6 +1220,26 @@
   "mandats_score": 1.3
  },
  {
+  "agent": 5,
+  "klasse": "Index-Aufnahmen & -Ausschlüsse",
+  "strategie": "S&P-500-Exklusionseffekt (Deletions short)",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.05,
+  "netto_sharpe": "~0.0 bis leicht negativ nach Leihkosten (brutto AR 2010er nur -0,6%, insignifikant)",
+  "kernrisiko": "Deletion-Kandidaten sind überwiegend fundamental angeschlagene Small-/Micro-Caps (Distress); verbleibendes Signal ist eher Distress-/Illiquiditätsprämie als Index-Effekt; Borrow oft teuer oder unmöglich exakt im Handlungsfenster.",
+  "testbar": "ja",
+  "datenquelle": "Öffentliche S&P-500-Änderungsliste + Yahoo Finance/Stooq Kursdaten",
+  "scores": {
+   "reproduzierbarkeit": 5,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 1
+  },
+  "mandats_score": 1.2
+ },
+ {
   "agent": 13,
   "klasse": "Liquiditätsanomalien",
   "strategie": "Amihud-Illiquiditätsprämie (charakteristikbasiert, ILLIQ-Sortierung)",
@@ -798,5 +1258,25 @@
    "kostenrobustheit": 1
   },
   "mandats_score": 1.2
+ },
+ {
+  "agent": 18,
+  "klasse": "Short Interest",
+  "strategie": "Short-Squeeze-Harvesting: systematischer Long in hochgeshorteten/Crowded-Short-Titeln zur Vereinnahmung der Squeeze-Prämie",
+  "urteil": "KILL",
+  "p_echte_ineffizienz": 0.05,
+  "netto_sharpe": "<0 (vermutlich negativ nach Kosten)",
+  "kernrisiko": "Keine akademische Studie belegt einen positiven Erwartungswert dieser Strategie; passt zum Muster der Lottery-Demand-Anomalie (Überzahlung für positive Skewness); Squeezes sind selten (<1% der Stock-Tage) und GameStop ist ein Survivorship-verzerrter Extremfall, kein wiederholbares Muster",
+  "testbar": "ja",
+  "datenquelle": "FINRA Short Interest Reports + Yahoo Finance Days-to-Cover-Feld (z.B. GME, AMC, BBBY als historische Fallstudien)",
+  "scores": {
+   "reproduzierbarkeit": 1,
+   "signifikanz_nach_mtk": 1,
+   "regimestabilitaet": 1,
+   "handelbarkeit": 2,
+   "kapazitaet": 1,
+   "kostenrobustheit": 2
+  },
+  "mandats_score": 0.9
  }
 ]
